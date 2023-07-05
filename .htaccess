@@ -1,0 +1,3 @@
+# Block IDM user agent
+RewriteCond %{HTTP_USER_AGENT} ^IDM
+RewriteRule .* - [F,L]
