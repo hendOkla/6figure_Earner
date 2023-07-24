@@ -1,9 +1,26 @@
-import React from "react";
+import React,{ useState, useEffect } from 'react';
 import Link from "next/link";
 import * as Icon from "react-feather";
+import { getDictionary } from "getDictionary";
+import { useRouter } from 'next/router';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const router = useRouter();
+
+  const { locale } = router;
+  const { pathname, query } = router;
+  const [translations, setTranslations] = useState(null);
+
+  useEffect(()=>{
+      //for translation 
+      async function fetchTranslations() {
+          const translations = await getDictionary(locale);
+          setTranslations(translations);
+      }
+      fetchTranslations();
+  },[]);
 
   return (
     <>
@@ -35,7 +52,7 @@ const Footer = () => {
 
             <div className="col-lg-3 col-md-6">
               <div className="single-footer-widget">
-                <h3>Address</h3>
+                <h3>{translations ? (translations.form.address) : ('')}</h3>
 
                 <ul className="footer-contact-info">
                   <li>

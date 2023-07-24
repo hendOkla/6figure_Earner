@@ -19,7 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ handler)
 /* harmony export */ });
-const stripe = __webpack_require__(8174)("sk_test_51NGPEkD9XEKkDfre8Bh4W29JPlkYgMojXGiugvHZ3aANyky3VZzfCkx9Ad0aezcV1MPoNmdly8MDRg9VltkLk3ve00WRqTL2ji");
+const stripe = __webpack_require__(8174)("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");
 async function handler(req, res) {
     const { amount , name , id  } = req.body;
     try {

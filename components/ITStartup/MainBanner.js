@@ -1,7 +1,25 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import Link from 'next/link';
+import { getDictionary } from "getDictionary";
+import { useRouter } from 'next/router';
 
 const MainBanner = () => {
+    const router = useRouter();
+
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
+
+    useEffect(()=>{
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
+    },[]);
+
+    
     return (
         <>
             <div className="main-banner">
@@ -11,11 +29,11 @@ const MainBanner = () => {
                             <div className="row h-100 justify-content-center align-items-center">
                                 <div className="col-lg-5">
                                     <div className="hero-content">
-                                        <h1>Get 6 different online and real life income streams.</h1>
-                                        <p>We are the first platform that provides 6 different sources of income through internet and real life.</p>
+                                        <h1>{translations ? (translations.form.Different) : ('')}</h1>
+                                        <p>{translations ? (translations.form.forstPlat) : ('')}</p>
                                         
                                         <Link href="/login" className="btn btn-primary">
-                                            Get Started
+                                            {translations ? (translations.form.getStatrt) : ('')}
                                         </Link>
                                     </div>
                                 </div>

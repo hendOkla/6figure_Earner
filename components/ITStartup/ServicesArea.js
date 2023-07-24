@@ -1,7 +1,24 @@
-import React from 'react';
-import * as Icon from 'react-feather';
+import React,{ useState, useEffect } from 'react';
+import Link from 'next/link';
+import { getDictionary } from "getDictionary";
+import { useRouter } from 'next/router';
 
 const ServicesArea = () => {
+    const router = useRouter();
+
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
+
+    useEffect(()=>{
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
+    },[]);
+
     return (
         <>
             <div className="services-area ptb-80 bg-f7fafd">
@@ -9,19 +26,19 @@ const ServicesArea = () => {
                     <div className="row justify-content-center align-items-center">
                         <div className="col-lg-6 col-md-12 services-content">
                             <div className="section-title">
-                                <h2>We seek to provide different sources of income through the Internet and working life</h2>
+                                <h2>{translations ? (translations.form.wrProvide) : ('')}</h2>
                                 <div className="bar"></div>
-                                <h5>The sources we provide :</h5>
+                                <h5>{translations ? (translations.form.sourcesProvider) : ('')} </h5>
                             </div>
 
                             <div className="row">
                                 <ul>
-                                    <li><p>Cryptocurrency trading.</p></li>
-                                    <li><p>Forex trading</p></li>
-                                    <li><p>Real estate in dubai</p></li>
-                                    <li><p>Photography</p></li>
-                                    <li><p>E-Commerce</p></li>
-                                    <li><p>Copywriting</p></li>
+                                    <li><p>{translations ? (translations.form.Cryptocurrency) : ('')} </p></li>
+                                    <li><p>{translations ? (translations.form.forexTrade) : ('')}</p></li>
+                                    <li><p>{translations ? (translations.form.realEst) : ('')}</p></li>
+                                    <li><p>{translations ? (translations.form.photography) : ('')}</p></li>
+                                    <li><p>{translations ? (translations.form.eCommerce) : ('')}</p></li>
+                                    <li><p>{translations ? (translations.form.copywriting) : ('')}</p></li>
                                 </ul>
                             </div>
                         </div>

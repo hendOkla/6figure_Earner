@@ -1,15 +1,30 @@
-import React,{ useState} from 'react';
+import React,{ useState, useEffect } from 'react';
 import * as Icon from 'react-feather';
 import axios from "axios";
+import { getDictionary } from "getDictionary";
+import { useRouter } from 'next/router';
 
 const ContactInfo = () => {
+
+    const router = useRouter();
+
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
 
     const [contactList,setContactList] = useState([]);
     
 
     React.useEffect(() => {
         setContactList([]);       
-        fetchContactList();    
+        fetchContactList();   
+        
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
     },[]);
 
     function fetchContactList(){
@@ -36,7 +51,7 @@ const ContactInfo = () => {
                                         <div className="icon">
                                             <Icon.Mail />
                                         </div>
-                                        <h3>Mail Here</h3>
+                                        <h3>{translations ? (translations.form.mail) : ('')}</h3>
                                         <p><a href="mailto:info@startp.com">{item.email}</a></p>
                                     </div>
                                 </div>
@@ -46,7 +61,7 @@ const ContactInfo = () => {
                                         <div className="icon">
                                             <Icon.MapPin />
                                         </div>
-                                        <h3>Visit Here</h3>
+                                        <h3>{translations ? (translations.form.address) : ('')}</h3>
                                         <p>{item.location_en}</p>
                                     </div>
                                 </div>
@@ -56,7 +71,7 @@ const ContactInfo = () => {
                                         <div className="icon">
                                             <Icon.Phone />
                                         </div>
-                                        <h3>Call Here</h3>
+                                        <h3>{translations ? (translations.form.phone) : ('')}</h3>
                                         <p><a href="tel:+1234567890">{item.phone}</a></p>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-const stripe = require('stripe')('sk_test_51NGPEkD9XEKkDfre8Bh4W29JPlkYgMojXGiugvHZ3aANyky3VZzfCkx9Ad0aezcV1MPoNmdly8MDRg9VltkLk3ve00WRqTL2ji');
+const stripe = require('stripe')('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');
 
 export default async function handler(req, res) {
   const { amount, name , id  } = req.body;

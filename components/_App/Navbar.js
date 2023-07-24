@@ -4,7 +4,7 @@ import Link from "next/link";
 import * as Icon from "react-feather";
 import { useSelector } from "react-redux";
 import axios from "axios";
-
+import { getDictionary } from "getDictionary";
 
 
 
@@ -22,6 +22,11 @@ const NavbarStyleFour = () => {
   const [menu, setMenu] = React.useState(true);
   const [categoryList,setCategoryList] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const { locale } = router;
+  const { pathname, query } = router;
+  const [translations, setTranslations] = useState(null);
 
   const toggleNavbar = () => {
     setMenu(!menu);
@@ -44,8 +49,14 @@ const NavbarStyleFour = () => {
         setIsLoggedIn(true);
       }
     } 
-
     fetchCategoryList(); 
+
+      //for translation 
+      async function fetchTranslations() {
+        const translations = await getDictionary(locale);
+        setTranslations(translations);
+    }
+    fetchTranslations();
 
 
   },[]);
@@ -121,8 +132,7 @@ const NavbarStyleFour = () => {
                         currentPath == "/" && "active"
                       }`}
                     >
-                      Home 
-                      
+                      {translations ? (translations.form.home) : ('')}                      
                     </Link>
                   </li>
 
@@ -132,7 +142,7 @@ const NavbarStyleFour = () => {
                       onClick={(e) => e.preventDefault()}
                       className="nav-link"
                     >
-                      Education <Icon.ChevronDown />
+                      {translations ? (translations.form.education) : ('')} <Icon.ChevronDown />
                     </Link>
 
                     <ul className="dropdown-menu">
@@ -141,7 +151,7 @@ const NavbarStyleFour = () => {
                               return(
                                 <li className="nav-item" key={item.id}>
                                   <Link className="nav-item"  href={{ pathname: '/blog-5', query: { id: `${item.id}` ,cat:`${item.name_en}`} }}>
-                                    {item.name_en}
+                                    {translations ? (item[`name_${locale}`]) : ('')}
                                   </Link>
                                 </li>
                               )
@@ -159,7 +169,7 @@ const NavbarStyleFour = () => {
 
                   <li className="nav-item">
                       <Link href="/about-3/"onClick={toggleNavbar}className={`nav-link ${currentPath == "/about-3/" && "active"}`}>
-                        About
+                      {translations ? (translations.form.about) : ('')}
                       </Link>
                   </li>
 
@@ -171,7 +181,7 @@ const NavbarStyleFour = () => {
                         currentPath == "/contact/" && "active"
                       }`}
                     >
-                      Contact
+                      {translations ? (translations.form.contact) : ('')}
                     </Link>
                   </li>
                 </ul>
@@ -179,13 +189,15 @@ const NavbarStyleFour = () => {
 
               {/* Others option */}
               <div className="others-option">
-                <button href="/contact/" onClick={() => handleClick(isLoggedIn)} className="btn btn-primary">{isLoggedIn ? 'Log out' : 'Log in'} </button>
+                <button href="/contact/" onClick={() => handleClick(isLoggedIn)} className="btn btn-primary">{isLoggedIn ? (translations ? (translations.form.logOut) : ('')) : (translations ? (translations.form.login) : (''))} </button>
               </div>
             </nav>
           </div>
         </div>
       </header>
     </>
+
+    
   );
 };
 

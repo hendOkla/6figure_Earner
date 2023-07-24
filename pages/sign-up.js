@@ -1,15 +1,19 @@
+import React,{ useState, useEffect } from 'react';
 import PageBanner from '@/components/Common/PageBanner';
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
-import React , { useState } from 'react';
 import { useRouter } from 'next/router';
 import swal from 'sweetalert';
 import Link from 'next/link';
 import axios from 'axios';
+import { getDictionary } from "getDictionary";
 
  
 const SignUp = () => {
     const router = useRouter();
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
 
     const [errorConf,setErrorCont] = useState([]);
     const [registerInput,setRegister]=useState({
@@ -70,11 +74,20 @@ const SignUp = () => {
         
     }
 
+    useEffect(()=>{
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
+    },[]);
+
 
     return (
         <>
             <Navbar />
-            <PageBanner pageTitle="Sign Up" />
+            <PageBanner pageTitle={translations ? (translations.form.signUp) : ('')} />
             <div className="ptb-80">
                 <div className="container">
                     <div className="auth-form">
@@ -82,7 +95,7 @@ const SignUp = () => {
                             <Link href="/it-startup">
                                 <img src="/images/logo.png" />
                             </Link>
-                            <p>Create a new account</p>
+                            <p>{translations ? (translations.form.createAccount) : ('')}</p>
                         </div>
                         <form onSubmit={Register}>
                             <div className="row">
@@ -98,7 +111,7 @@ const SignUp = () => {
                             </div>
                             <div className="row">
                                 <div className="mb-3">
-                                    <label className="form-label">Email</label>
+                                    <label className="form-label">{translations ? (translations.form.email) : ('')}</label>
                                     <input type="email" 
                                         className="form-control" 
                                         name="email" 
@@ -109,7 +122,7 @@ const SignUp = () => {
                             </div>
                             <div className="row">
                                 <div className="mb-3 col-lg-6">
-                                    <label className="form-label">First Name</label>
+                                    <label className="form-label">{translations ? (translations.form.fname) : ('')}</label>
                                     <input type="text" 
                                         className="form-control" 
                                         name="fname" 
@@ -118,7 +131,7 @@ const SignUp = () => {
                                     <span className='span span-reg'>{registerInput.error_list.fname}</span>
                                 </div>
                                 <div className="mb-3 col-lg-6">
-                                    <label className="form-label">Last Name</label>
+                                    <label className="form-label">{translations ? (translations.form.lname) : ('')}</label>
                                     <input type="text" 
                                         className="form-control" 
                                         name="lname"
@@ -129,7 +142,7 @@ const SignUp = () => {
                             </div>
                             <div className="row">
                                 <div className="mb-3 col-lg-6">
-                                    <label className="form-label">Password</label>
+                                    <label className="form-label">{translations ? (translations.form.pass) : ('')}</label>
                                     <input type="password" 
                                         className="form-control" 
                                         name="password"
@@ -138,7 +151,7 @@ const SignUp = () => {
                                     <span className='span span-reg'>{registerInput.error_list.password}</span>
                                 </div> 
                                 <div className="mb-3 col-lg-6">
-                                    <label className="form-label">Confirm Password</label>
+                                    <label className="form-label">{translations ? (translations.form.confpass) : ('')}</label>
                                     <input type="password"
                                         className="form-control" 
                                         name="confPassword"
@@ -148,10 +161,10 @@ const SignUp = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">Sign Up</button>
+                            <button type="submit" className="btn btn-primary">{translations ? (translations.form.signUp) : ('')}</button>
                         </form>
                         <div className="foot">
-                            <p>Already have an account yet? <Link href="/login">Login</Link></p>
+                            <p>{translations ? (translations.form.haveAccount) : ('')} <Link href="/login">{translations ? (translations.form.login) : ('')}</Link></p>
                         </div>
                     </div>
                 </div>

@@ -55,8 +55,6 @@ const DownloadLesson = () => {
             pathname: '/showLesson',
             query: {URL:Url }
         });
-
-        
     }
     return (
         <>
@@ -78,7 +76,7 @@ const DownloadLesson = () => {
                                                     </div>
                         
                                                     <div className="team-content">
-                                                        <div onClick={(e)=>handleDownloadClick(e,item.id, item.video)} className="team-info">
+                                                        <div onClick={(e)=>handleDownloadClick(e,item.id, (locale==='ar')? item.video :item[`video_${locale}`])} className="team-info">
                                                             <h3>{translations.form.display}</h3>
                                                         </div>
                                                         <div>

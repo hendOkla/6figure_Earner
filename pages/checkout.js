@@ -33,7 +33,7 @@ export default function Checkout() {
       <h1>{product.name}</h1>
       <h2>${product.price.toFixed(2)}</h2>
       <StripeCheckout
-        stripeKey={'pk_test_51NGPEkD9XEKkDfre36rfM62vRNwFTjr3wsQjBW3tqi0dSZvICePTUWVO4VQ2UUzpz11bNiMDvBwHtUTSGHE0SOYr00kucCBOb5'}
+        stripeKey={'pk_live_51NGPEkD9XEKkDfrerMRBkZulRw0Nk2adtRLlz9PLvJMCEcs58yREEkGGFtfSsTgRqG5jC8zJAmU7Xmffhyu4lfqi00QpD9FVQe'}
         token={handleToken}
         billingAddress
         shippingAddress

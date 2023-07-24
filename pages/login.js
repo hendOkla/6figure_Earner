@@ -1,4 +1,4 @@
-import React , { useState }from 'react';
+import React,{ useState, useEffect } from 'react';
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import PageBanner from '@/components/Common/PageBanner';
@@ -7,6 +7,7 @@ import * as Icon from 'react-feather';
 import swal from 'sweetalert';
 import Link from 'next/link';
 import axios from 'axios';
+import { getDictionary } from "getDictionary";
  
 const Login = () => {
 
@@ -14,23 +15,20 @@ const Login = () => {
 
     const router = useRouter();
 
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
+
     const[loginInput, setLogin]= useState({
         email:'',
         password:'',
         error_list:[],
     });
-
     const handleInput=(e)=>{
         e.persist(); 
         setLogin({...loginInput,[e.target.name]:e.target.value});
         
     }
-
-
-
-
-
-
     const handleSubmit= async(e)=>{
         e.preventDefault();
 
@@ -66,7 +64,14 @@ const Login = () => {
 
         
     }
-
+    useEffect(()=>{
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
+    },[]);
 
 
     
@@ -79,7 +84,7 @@ const Login = () => {
         <>
             <Navbar />
 
-            <PageBanner pageTitle="Login" />
+            <PageBanner pageTitle={translations ? (translations.form.login) : ('')}/>
 
             <div className="ptb-80">
                 <div className="container">
@@ -88,12 +93,13 @@ const Login = () => {
                             <Link href="/it-startup">
                                 <img src="/images/logo.png" />
                             </Link>
-                            <p>Don't have an account yet? <Link href="/sign-up">Sign Up</Link></p>
+                            <p>{translations ? (translations.form.dontHaveAccount) : ('')} 
+                            <Link href="/sign-up">{translations ? (translations.form.signUp) : ('')}</Link></p>
                         </div>
 
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
-                                <label className="form-label">Email</label>
+                                <label className="form-label">{translations ? (translations.form.email) : ('')}</label>
                                 <input type="email"
                                        className="form-control"
                                         name="email"
@@ -103,7 +109,7 @@ const Login = () => {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label">Password</label>
+                                <label className="form-label">{translations ? (translations.form.pass) : ('')}</label>
                                 <input type="password" 
                                        className="form-control"
                                        name="password"
@@ -112,15 +118,15 @@ const Login = () => {
                                 <span className='span span-reg'>{loginInput.error_list.password}</span>
                             </div>
 
-                            <div className="mb-3">
-                                <p><Link href="/forgot-password">Forgot Password</Link></p>
-                            </div>
+                          {/*   <div className="mb-3">
+                                <p><Link href="/forgot-password">{translations ? (translations.form.forgetPass) : ('')}</Link></p>
+                            </div> */}
 
-                            <button type="submit" className="btn btn-primary">Login</button>
+                            <button type="submit" className="btn btn-primary">{translations ? (translations.form.login) : ('')}</button>
                         </form>
 
                         <div className="foot">
-                            <p>or connect with</p>
+                            <p>{translations ? (translations.form.signUp) : ('')}</p>
                             <ul>
                                 <li>
                                     <a href="https://www.mail.com/" target="_blank">

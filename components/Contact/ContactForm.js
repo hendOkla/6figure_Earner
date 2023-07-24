@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React,{ useState, useEffect } from 'react';
 import axios from "axios";
 import Link from 'next/link';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
-import baseUrl from '../../utils/baseUrl'
+import baseUrl from '../../utils/baseUrl';
+import { getDictionary } from "getDictionary";
+import { useRouter } from 'next/router';
 
 const alertContent = () => {
     MySwal.fire({
@@ -21,6 +23,21 @@ const alertContent = () => {
   
 
 const ContactForm = () => {
+
+    const router = useRouter();
+
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
+
+    useEffect(()=>{
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
+    },[]);
 
     const[emailMessage,setEmailMessage] = useState({
         customer_name: "",
@@ -65,9 +82,9 @@ const ContactForm = () => {
             <div className="contact-area ptb-80">
                 <div className="container">
                     <div className="section-title">
-                        <h2>Get In Touch With Us</h2>
+                        <h2>{translations ? (translations.form.getInTouch) : ('')}</h2>
                         <div className="bar"></div>
-                        <p>Anything On your Mind. We’ll Be Glad To Assist You!</p>
+                        <p> {translations ? (translations.form.anything) : ('')}</p>
                     </div>
 
                     <div className="row align-items-center">
@@ -83,7 +100,7 @@ const ContactForm = () => {
                                             <input 
                                                 type="text" 
                                                 name="customer_name" 
-                                                placeholder="Your Name" 
+                                                placeholder={translations ? (translations.form.yourName) : ('')}
                                                 className="form-control" 
                                                 value={emailMessage.customer_name}
                                                 onChange={handleInput}
@@ -98,7 +115,7 @@ const ContactForm = () => {
                                             <input 
                                                 type="text" 
                                                 name="email" 
-                                                placeholder="Your email address" 
+                                                placeholder={translations ? (translations.form.yourAddress) : ('')} 
                                                 className="form-control" 
                                                 value={emailMessage.email}
                                                 onChange={handleInput}
@@ -113,7 +130,7 @@ const ContactForm = () => {
                                             <input 
                                                 type="text" 
                                                 name="number" 
-                                                placeholder="Your phone number" 
+                                                placeholder={translations ? (translations.form.yourPhone) : ('')}
                                                 className="form-control" 
                                                 value={emailMessage.number}
                                                 onChange={handleInput}
@@ -128,7 +145,7 @@ const ContactForm = () => {
                                             <input 
                                                 type="text" 
                                                 name="subject" 
-                                                placeholder="Your Subject" 
+                                                placeholder={translations ? (translations.form.yourSub) : ('')} 
                                                 className="form-control" 
                                                 value={emailMessage.subject}
                                                 onChange={handleInput}
@@ -144,7 +161,7 @@ const ContactForm = () => {
                                                 name="text" 
                                                 cols="30" 
                                                 rows="5" 
-                                                placeholder="Write your message..." 
+                                                placeholder={translations ? (translations.form.yourMessage) : ('')} 
                                                 className="form-control" 
                                                 value={emailMessage.text}
                                                 onChange={handleInput}
@@ -155,7 +172,7 @@ const ContactForm = () => {
                                    </div>
                 
                                     <div className="col-lg-12 col-sm-12">
-                                        <button type="submit" className="btn btn-primary">Send Message</button>
+                                        <button type="submit" className="btn btn-primary">{translations ? (translations.form.sendMessage) : ('')} </button>
                                     </div>
                                 </div>
                             </form> 
