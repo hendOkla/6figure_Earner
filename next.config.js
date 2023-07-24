@@ -16,7 +16,7 @@ module.exports = {
     trailingSlash: true,
     optimizeFonts: false,
     i18n: {
-        locales: ['en', 'ar'],
+        locales: ['en', 'ar','sp'],
         defaultLocale: 'en',
     },
 }
