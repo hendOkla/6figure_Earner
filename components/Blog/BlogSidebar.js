@@ -4,18 +4,25 @@ import * as Icon from 'react-feather';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { getDictionary } from "getDictionary";
 
 function BlogSidebar({ myValue }){
     const [showInput, setShowInput] = useState(false);
     const [isActive, setisActive] = useState(false);
-
-
-
-    
-    
-    
-    
     const router = useRouter();
+
+
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
+
+
+
+    
+    
+    
+    
+   
     const toggleInput = () => {
         setShowInput(!showInput);
     };
@@ -42,6 +49,14 @@ function BlogSidebar({ myValue }){
                 setisActive(false)
             }
         });
+
+
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
     },[]);
     
 
@@ -67,57 +82,58 @@ function BlogSidebar({ myValue }){
     
     return (
         <>
-            <div className="widget-area" id="secondary">
+            {translations ? (
+                <>
+                    <div className="widget-area" id="secondary">
 
-                {isActive ? (
-                     <div className="widget widget_tag_cloud" >
-                        <h3 className="widget-title">Show Lessons </h3>
+                        {isActive ? (
+                            <div className="widget widget_tag_cloud" >
+                                <h3 className="widget-title">{translations.form.show_lesson} </h3>
 
-                        <div className="tagcloud">
-                            <Link href={`show-lessons?MyID=${myValue}`} onClick={toggleInput} width={'100%'}>
-                                <span className="tag-link-count"> </span>  Show 
-                            </Link>
-                        </div>
-                    </div>
-                ) : (
-                    <div>
-                        <div className="widget widget_tag_cloud" >
-                            <h3 className="widget-title">Payment</h3>
-                            <div className="tagcloud">
-                                <Link href="#myInput" onClick={toggleInput} width={'100%'}>
-                                    <span className="tag-link-count"> <Icon.ShoppingCart /></span>  Pay 
-                                </Link>
-                            </div>
-                        </div>
-                        {showInput && (
-                            <div className='row row-div'>
-                                <div className='col-lg-8'>
-                                    <input type="Url"
-                                            className="form-control"
-                                            name="links"
-                                            placeholder='Enter the share link please'
-                                            onChange={handleInput}
-                                            value={LinkInput.links}
-                                            required       
-                                    />
-                                    <span className='span span-reg'>{LinkInput.error_list.links}</span>
-                                </div>
-                                
-                                <div className='col-lg-4'>
-                                    <button href="/contact/" onClick={handleClick} className="btn btn-success btn-div">send </button>
+                                <div className="tagcloud">
+                                    <Link href={`show-lessons?MyID=${myValue}`} onClick={toggleInput} width={'100%'}>
+                                        <span className="tag-link-count"> </span>  {translations.form.show} 
+                                    </Link>
                                 </div>
                             </div>
-                            
+                        ) : (
+                            <div>
+                                <div className="widget widget_tag_cloud" >
+                                    <h3 className="widget-title">{translations.form.payment}</h3>
+                                    <div className="tagcloud">
+                                        <Link href="#myInput" onClick={toggleInput} width={'100%'}>
+                                            <span className="tag-link-count"> <Icon.ShoppingCart /></span>  {translations.form.pay} 
+                                        </Link>
+                                    </div>
+                                </div>
+                                {showInput && (
+                                    <div className='row row-div'>
+                                        <div className='col-lg-8'>
+                                            <input type="Url"
+                                                    className="form-control"
+                                                    name="links"
+                                                    placeholder='Enter the share link please'
+                                                    onChange={handleInput}
+                                                    value={LinkInput.links}
+                                                    required       
+                                            />
+                                            <span className='span span-reg'>{LinkInput.error_list.links}</span>
+                                        </div>
+                                        
+                                        <div className='col-lg-4'>
+                                            <button href="/contact/" onClick={handleClick} className="btn btn-success btn-div">{translations.form.send} </button>
+                                        </div>
+                                    </div>
+                                    
+                                )}
+                            </div>                   
                         )}
-                    </div>                   
-                )}
-      
-            </div>
 
-
-
-
-
+                    </div>              
+                </>
+            ) : (
+            ''
+            )}
         </>
     )
 }

@@ -136,18 +136,6 @@ const NavbarStyleFour = () => {
                     </Link>
 
                     <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <Link
-                          href="/features/"
-                          onClick={toggleNavbar}
-                          className={`nav-link ${
-                            currentPath == "/features/" && "active"
-                          }`}
-                        >
-                          MarketPro <Icon.ChevronDown />
-                        </Link>
-
-                        <ul className="dropdown-menu">
                         {
                           categoryList.map((item)=>{
                               return(
@@ -159,10 +147,6 @@ const NavbarStyleFour = () => {
                               )
                           })
                       }
-                        </ul>
-                      </li>
-
-
                     </ul>
                   </li>
 

@@ -15,9 +15,6 @@ useEffect(() => {
 async function fetchTranslations() {
   const translations = await getDictionary(locale);
   setTranslations(translations);
-
-
-  console.log(translations.form.ar);
 }
 fetchTranslations();
 
@@ -25,21 +22,21 @@ fetchTranslations();
 
 return (
 <>
-{translations ? (
-  <div className="lang-didebar">
-    <a href={`${pathname}?${new URLSearchParams(query).toString()}`} title="Default Demo">
-    {translations.form.en}
-    </a>
-    <a href={`/ar/${pathname}?${new URLSearchParams(query).toString()}`} title="RTL Demo">
-    {translations.form.ar}
-    </a>
-    <a href={`/sp/${pathname}?${new URLSearchParams(query).toString()}`} title="RTL Demo">
-    {translations.form.sp}
-    </a>
-  </div>
-) : (
-''
-)}
+  {translations ? (
+    <div className="lang-didebar">
+      <a href={`${pathname}?${new URLSearchParams(query).toString()}`} title="Default Demo">
+      {translations.form.en}
+      </a>
+      <a href={`/ar/${pathname}?${new URLSearchParams(query).toString()}`} title="RTL Demo">
+      {translations.form.ar}
+      </a>
+      <a href={`/sp/${pathname}?${new URLSearchParams(query).toString()}`} title="RTL Demo">
+      {translations.form.sp}
+      </a>
+    </div>
+  ) : (
+  ''
+  )}
 </>
 
 );

@@ -2,6 +2,14 @@
     "form":{
         "ar":"ar",
         "en":"en",
-        "sp":"sp"
+        "sp":"sp",
+        "buy":"Buy",
+        "show":"Show",
+        "number_lesson":"number of lessons",
+        "show_lesson": "Show Lessons",
+        "payment" : "Payment",
+        "pay" : "Pay",
+        "send" : "Send"
+    
     }
 }

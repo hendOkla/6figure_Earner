@@ -6,6 +6,7 @@ import * as Icon from 'react-feather';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios from "axios";
+import { getDictionary } from "getDictionary";
 
  
 const Blog5 = () => {
@@ -13,6 +14,13 @@ const Blog5 = () => {
     const { id } = router.query;
     const { cat } = router.query;
     const [curseList,setCurseList] = useState([]);
+
+
+
+
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
     
 
     React.useEffect(() => {
@@ -22,6 +30,13 @@ const Blog5 = () => {
         }
         setCurseList([]);       
         fetchCourseList();    
+
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
     },[id]);
 
     function fetchCourseList(){
@@ -54,101 +69,81 @@ const Blog5 = () => {
 
     return (
         <>
-            <Navbar />
-            <PageBanner pageTitle={cat} /> 
-                <div className="blog-area ptb-80">
-                    <div className="container">
-                        <div className="row">
-                            {curseList.length ? 
-                                (
-                                    curseList.map((item)=>{
-                                        return(
-                                            <>
-                                                {/* <div className="col-lg-4 col-md-6">
-                                                    <div className="single-blog-post-item">
-                                                        <div className="post-image">
-                                                            <Link href="/blog-details">
-                                                                <img src={`https://6figure-earner.world/LarReApi/public/${item.image}`} width={'100%'} height={'300px'} alt="image" />
-                                                            </Link>
-                                                        </div>
-                        
-                                                        <div className="post-content">
-                                                            <ul className="post-meta">
-                                                                <li className="a-blog">{item.name_en}</li>
-                                                            </ul>
-                                                            <h3>
-                                                                <Link href={{ pathname: '/blog-details', query: { course_id: `${item.id}` } }}className="a-blog">
-                                                                {item.description_en.slice(0, '.')}
+            {translations ? (
+                <>
+                    <Navbar />
+                    <PageBanner pageTitle={cat} /> 
+                        <div className="blog-area ptb-80">
+                            <div className="container">
+                                <div className="row">
+                                    {curseList.length ? 
+                                        (
+                                            curseList.map((item)=>{
+                                                return(
+                                                    <>
+                                                        <div className="col-lg-4 col-md-6 col-sm-12">
+                                                            <div className="single-services-box-item">
+                                                                <div className="icon">
+                                                                    <img src={`https://6figure-earner.world/LarReApi/public/${item.image}`}  alt="image" />
+                                                                </div>
+                                                                <h3>
+                                                                    <Link href="#" className="link-service" >
+                                                                        {item[`name_${locale}`]}
+                                                                    </Link>
+                                                                </h3>
+                                                                <p>{item[`description_${locale}`]}</p>
+                                                                
+                                                                <Link href="#" onClick={() => handleClick(id, item.id)} className="learn-more-btn link-service">
+                                                                    <Icon.ArrowRight /> {localStorage.getItem(`auth_token`)?translations.form.buy:translations.form.show}
                                                                 </Link>
-                                                            </h3>
-                        
-                                                            <button  onClick={() => handleClick(id, item.id)}  className="read-more-btn a-blog">
-                                                            {localStorage.getItem(`auth_token`)?'Buy':'Show'}  <Icon.PlusCircle />
-                                                            </button>
+
+                                                                <div className="shape">
+                                                                    <img src="/images/bigdata-analytics/rectangle.png" alt="image" />
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                    </>
+                                                )
+                                            })
+                                        ) : (
+                                            <div className="d-table">
+                                                <div className="error-content">
+                                                    <div className="notfound-404" >
+                                                        <h1 style={{ fontSize: '80px'}}>Not curses found.</h1>
                                                     </div>
                                                 </div>
- */}
-                                                <div className="col-lg-4 col-md-6 col-sm-12">
-                                                    <div className="single-services-box-item">
-                                                        <div className="icon">
-                                                            <img src={`https://6figure-earner.world/LarReApi/public/${item.image}`}  alt="image" />
-                                                        </div>
-                                                        <h3>
-                                                            <Link href="#" className="link-service" >
-                                                                {item.name_en}
-                                                            </Link>
-                                                        </h3>
-                                                        <p>{item.description_en}</p>
-                                                        
-                                                        <Link href="#" onClick={() => handleClick(id, item.id)} className="learn-more-btn link-service">
-                                                            <Icon.ArrowRight /> {localStorage.getItem(`auth_token`)?'Buy':'Show'}
-                                                        </Link>
-
-                                                        <div className="shape">
-                                                            <img src="/images/bigdata-analytics/rectangle.png" alt="image" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
-
-                                            
+                                            </div>                            
                                         )
-                                    })
-                                ) : (
-                                    <div className="d-table">
-                                        <div className="error-content">
-                                            <div className="notfound-404" >
-                                                <h1 style={{ fontSize: '80px'}}>Not curses found.</h1>
-                                            </div>
-                                        </div>
-                                    </div>                            
-                                )
-                            }
-                        </div>
-                    </div>
+                                    }
+                                </div>
+                            </div>
 
-                    {/* Shape Images */}
-                    <div className="shape2 rotateme">
-                        <img src="/images/shape2.svg" alt="shape" />
-                    </div>
-                    <div className="shape3">
-                        <img src="/images/shape3.svg" alt="shape" />
-                    </div>
-                    <div className="shape4">
-                        <img src="/images/shape4.svg" alt="shape" />
-                    </div>
-                    <div className="shape6 rotateme">
-                        <img src="/images/shape4.svg" alt="shape" />
-                    </div>
-                    <div className="shape7">
-                        <img src="/images/shape4.svg" alt="shape" />
-                    </div>
-                    <div className="shape8 rotateme">
-                        <img src="/images/shape2.svg" alt="shape" />
-                    </div>
-                </div>
-            <Footer />
+                            {/* Shape Images */}
+                            <div className="shape2 rotateme">
+                                <img src="/images/shape2.svg" alt="shape" />
+                            </div>
+                            <div className="shape3">
+                                <img src="/images/shape3.svg" alt="shape" />
+                            </div>
+                            <div className="shape4">
+                                <img src="/images/shape4.svg" alt="shape" />
+                            </div>
+                            <div className="shape6 rotateme">
+                                <img src="/images/shape4.svg" alt="shape" />
+                            </div>
+                            <div className="shape7">
+                                <img src="/images/shape4.svg" alt="shape" />
+                            </div>
+                            <div className="shape8 rotateme">
+                                <img src="/images/shape2.svg" alt="shape" />
+                            </div>
+                        </div>
+                    <Footer />                    
+                
+                </>
+            ) : (
+            ''
+            )}
         </>
     )
 }
