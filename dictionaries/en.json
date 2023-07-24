@@ -9,6 +9,7 @@
         "show_lesson": "Show Lessons",
         "payment" : "Payment",
         "pay" : "Pay",
-        "send" : "Send"
+        "send" : "Send",
+        "display" : "Display"
     }
 }

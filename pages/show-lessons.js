@@ -5,6 +5,7 @@ import Footer from "@/components/_App/Footer";
 import * as Icon from 'react-feather';
 import axios from "axios";
 import { useRouter } from 'next/router';
+import { getDictionary } from "getDictionary";
 
 
 const DownloadLesson = () => {
@@ -12,14 +13,14 @@ const DownloadLesson = () => {
     const { MyID } = router.query;
 
 
-
-    
-
-
+    const { locale } = router;
+    const { pathname, query } = router;
+    const [translations, setTranslations] = useState(null);
 
     const CourseID = MyID;
     const course_id = CourseID;
     const [lessonList,setLessonList] = useState([]);
+    const [courseInput,  setCourse] = useState([]);
 
     
 
@@ -29,6 +30,21 @@ const DownloadLesson = () => {
                 setLessonList(res.data.lessons);
             }
         });
+
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();
+
+        axios.get(`/api/edit-course/${course_id}`).then(res=>{
+            if(res.data.status === 200){
+                setCourse(res.data.course);
+            }
+        });
+
+
     },[course_id]);
 
     const handleDownloadClick = (e,videoId,Url)=>{
@@ -41,47 +57,51 @@ const DownloadLesson = () => {
         });
 
         
-
-
     }
     return (
-      <div>
-        <Navbar />
-        <PageBanner pageTitle="Course Name" />
-        <div className="team-area pt-80 pb-50 bg-f9f6f6">
-            <div className="container">
-                <div className="row justify-content-center">
-                    {
-                        lessonList.map((item)=>{
-                            return(
-                                <div className="col-lg-4 col-md-6">
-                                    <div className="single-team">
-                                        <div className="team-image">
-                                            <img height={'150px'} src="/images/team-image/team1.jpeg" alt="image" />
-                                        </div>
-            
-                                        <div className="team-content">
-                                            <div onClick={(e)=>handleDownloadClick(e,item.id, item.video)} className="team-info">
-                                                <h3>Display</h3>
+        <>
+        {translations ? (
+            <>
+                <div>
+                    <Navbar />
+                    <PageBanner pageTitle={courseInput[`name_${locale}`]} />
+                    <div className="team-area pt-80 pb-50 bg-f9f6f6">
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                {
+                                    lessonList.map((item)=>{
+                                        return(
+                                            <div className="col-lg-4 col-md-6">
+                                                <div className="single-team">
+                                                    <div className="team-image">
+                                                        <img height={'150px'} src="/images/team-image/team1.jpeg" alt="image" />
+                                                    </div>
+                        
+                                                    <div className="team-content">
+                                                        <div onClick={(e)=>handleDownloadClick(e,item.id, item.video)} className="team-info">
+                                                            <h3>{translations.form.display}</h3>
+                                                        </div>
+                                                        <div>
+                                                            <h6>{item[`name_${locale}`]}</h6>
+                                                        </div>
+                        
+                                                        <p>{item[`description_${locale}`]}</p>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h6>{item.name_en}</h6>
-                                            </div>
-            
-                                            <p>{item.description_en}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })
-                    }
-                </div>
-            </div>
-        </div> 
-
-       
-        <Footer />
-      </div>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>        
+                    <Footer />
+                </div>                
+            </>
+        ) : (
+        ''
+        )}
+        </>
     );
   };
   

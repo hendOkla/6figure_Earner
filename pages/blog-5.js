@@ -82,7 +82,7 @@ const Blog5 = () => {
                                                 return(
                                                     <>
                                                         <div className="col-lg-4 col-md-6 col-sm-12">
-                                                            <div className="single-services-box-item">
+                                                            <div className="single-services-box-item" onClick={() => handleClick(id, item.id)}>
                                                                 <div className="icon">
                                                                     <img src={`https://6figure-earner.world/LarReApi/public/${item.image}`}  alt="image" />
                                                                 </div>
@@ -93,7 +93,7 @@ const Blog5 = () => {
                                                                 </h3>
                                                                 <p>{item[`description_${locale}`]}</p>
                                                                 
-                                                                <Link href="#" onClick={() => handleClick(id, item.id)} className="learn-more-btn link-service">
+                                                                <Link href="#"  className="learn-more-btn link-service">
                                                                     <Icon.ArrowRight /> {localStorage.getItem(`auth_token`)?translations.form.buy:translations.form.show}
                                                                 </Link>
 
