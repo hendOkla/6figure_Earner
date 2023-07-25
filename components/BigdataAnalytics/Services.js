@@ -87,7 +87,7 @@ const Services = () => {
                                 </div>
                                 
                                 <div className="price">
-                                    <span><sup>$</sup>350.00 <span>/Mon</span></span>
+                                    <span><sup>$</sup>1.00 <span>/Mon</span></span>
                                 </div>
                                 
                                 <div className="pricing-features">
@@ -109,7 +109,7 @@ const Services = () => {
                                     token={(token) => handleToken(token, 399 * 100, '6FE Standard')} 
                                     billingAddress
                                     shippingAddress
-                                    amount={399 * 100}
+                                    amount={0.001 * 100}
                                     name={'6FE Standard'}
                                 />
                                 </div>
