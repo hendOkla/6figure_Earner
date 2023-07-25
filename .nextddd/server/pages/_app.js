@@ -206,7 +206,7 @@ _components_App_Layout__WEBPACK_IMPORTED_MODULE_13__ = (__webpack_async_dependen
 
 
 
-(axios__WEBPACK_IMPORTED_MODULE_9___default().defaults.baseURL) = "https://6figure-earner.world/LarReApi/public/";
+(axios__WEBPACK_IMPORTED_MODULE_9___default().defaults.baseURL) = "https://6figure-earner.net/LarReApi/public/";
 (axios__WEBPACK_IMPORTED_MODULE_9___default().defaults.headers.post["Content-Type"]) = "application/json";
 (axios__WEBPACK_IMPORTED_MODULE_9___default().defaults.headers.post.Accept) = "application/json";
 (axios__WEBPACK_IMPORTED_MODULE_9___default().defaults.withCredentials) = true;

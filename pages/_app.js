@@ -11,7 +11,7 @@ import "swiper/css/bundle";
 import axios from "axios";
 
 
-axios.defaults.baseURL= 'https://6figure-earner.world/LarReApi/public/';
+axios.defaults.baseURL= 'https://6figure-earner.net/LarReApi/public/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.post['Accept'] = 'application/json';
 axios.defaults.withCredentials=true;
