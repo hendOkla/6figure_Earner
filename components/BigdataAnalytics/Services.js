@@ -92,14 +92,7 @@ const Services = () => {
                                 
                                 <div className="pricing-features">
                                     <ul>
-                                        <li className="active">5 GB Bandwidth</li>
-                                        <li className="active">Highest Speed</li>
-                                        <li className="active">1 GB Storage</li>
-                                        <li className="active">Unlimited Website</li>
-                                        <li className="active">Unlimited Users</li>
-                                        <li className="active">24x7 Great Support</li>
-                                        <li>Data Security and Backups</li>
-                                        <li>Monthly Reports and Analytics</li>
+
                                     </ul>
                                 </div>
                                 
@@ -127,14 +120,7 @@ const Services = () => {
                                 
                                 <div className="pricing-features">
                                     <ul>
-                                        <li className="active">5 GB Bandwidth</li>
-                                        <li className="active">Highest Speed</li>
-                                        <li className="active">1 GB Storage</li>
-                                        <li className="active">Unlimited Website</li>
-                                        <li className="active">Unlimited Users</li>
-                                        <li className="active">24x7 Great Support</li>
-                                        <li>Data Security and Backups</li>
-                                        <li>Monthly Reports and Analytics</li>
+
                                     </ul>
                                 </div>
                                 
