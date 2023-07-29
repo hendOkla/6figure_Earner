@@ -1,4 +1,4 @@
-import { useState } from 'react';
+/* import { useState } from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
 export default function Checkout() {
@@ -42,4 +42,36 @@ export default function Checkout() {
       />
     </div>
   );
+} */
+
+
+
+
+import { loadStripe } from '@stripe/stripe-js';
+
+/* const stripePromise = loadStripe('pk_test_51NGPEkD9XEKkDfre36rfM62vRNwFTjr3wsQjBW3tqi0dSZvICePTUWVO4VQ2UUzpz11bNiMDvBwHtUTSGHE0SOYr00kucCBOb5');
+ */
+export async function checkout({lineItems}) {
+  let stripePromise = null;
+
+  const getStripe = ()=>{
+    if(!stripePromise){
+      stripePromise = loadStripe(process.env.NEXT_PUBLIC_API_KEY)
+    }
+
+    return stripePromise
+
+  }
+
+  const stripe = await getStripe();
+
+  await stripe.redirectToCheckout({
+    mode:'subscription',
+    lineItems,
+    successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
+    cancelUrl: window.location.origin
+  }) 
+
+
+  
 }

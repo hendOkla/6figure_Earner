@@ -4,7 +4,11 @@ import StripeCheckout from 'react-stripe-checkout';
 import swal from 'sweetalert';
 import axios from 'axios';
 
-const Services = () => {
+import { checkout } from '../../checkout';
+
+
+
+export default function Services()  {
     const [status, setStatus] = useState('');
     const [amount, setAmount] = useState('');
     const [paymentPlan, setPaymentPlan] = useState('');
@@ -97,14 +101,24 @@ const Services = () => {
                                 </div>
                                 
                                 <div className="pricing-footer">
-                                <StripeCheckout
+{/*                                 <StripeCheckout
                                     stripeKey={'pk_live_51NGPEkD9XEKkDfrerMRBkZulRw0Nk2adtRLlz9PLvJMCEcs58yREEkGGFtfSsTgRqG5jC8zJAmU7Xmffhyu4lfqi00QpD9FVQe'}
                                     token={(token) => handleToken(token, 399 * 100, '6FE Standard')} 
                                     billingAddress
                                     shippingAddress
                                     amount={0.001 * 100}
                                     name={'6FE Standard'}
-                                />
+                                /> */}
+                                <button onClick={(()=>{
+                                    checkout({
+                                        lineItems:[{
+                                            price:"price_1NYzUxD9XEKkDfrexmdYaXbe",
+                                            quantity:1
+                                        }]
+                                    });
+                                })}>BUY
+                                    
+                                </button>
                                 </div>
                             </div>
                         </div>
@@ -143,4 +157,3 @@ const Services = () => {
     )
 }
 
-export default Services;  
