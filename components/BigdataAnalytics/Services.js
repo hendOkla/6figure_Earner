@@ -113,6 +113,7 @@ export default function Services()  {
                                     checkout({
                                         lineItems:[{
                                             price:"price_1NZARCD9XEKkDfre0sfJpY1J",
+                                            
                                             quantity:1
                                         }]
                                     });
