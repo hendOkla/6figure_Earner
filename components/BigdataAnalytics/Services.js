@@ -91,7 +91,7 @@ export default function Services()  {
                                 </div>
                                 
                                 <div className="price">
-                                    <span><sup>$</sup>1.00 <span>/Mon</span></span>
+                                    <span><sup>$</sup>2.00 <span>/Mon</span></span>
                                 </div>
                                 
                                 <div className="pricing-features">
