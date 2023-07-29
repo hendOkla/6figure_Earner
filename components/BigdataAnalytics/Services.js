@@ -112,14 +112,7 @@ export default function Services()  {
                                 <button className="btn btn-primary" onClick={(()=>{
                                     checkout({
                                         lineItems:[{
-                                                price_data: {
-                                                  currency: 'usd',
-                                                  unit_amount: 100,
-                                                  product_data: {
-                                                    name: 'My Product',
-                                                    description: 'Description of my product',
-                                                  },
-                                                },
+                                            price:"price_1NZ92nD9XEKkDfre5w75hHES",
                                             quantity:1
                                         }]
                                     });
