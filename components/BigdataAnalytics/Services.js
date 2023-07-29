@@ -109,7 +109,7 @@ export default function Services()  {
                                     amount={0.001 * 100}
                                     name={'6FE Standard'}
                                 /> */}
-                                <button onClick={(()=>{
+                                <button className="btn btn-primary" onClick={(()=>{
                                     checkout({
                                         lineItems:[{
                                             price:"price_1NZ92nD9XEKkDfre5w75hHES",
