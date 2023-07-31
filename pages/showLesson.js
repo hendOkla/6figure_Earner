@@ -52,7 +52,7 @@ const BlogDetails = () => {
                                     <div className="blog-details-desc">
                                         <div className="article-image">
                                             <video key={videoKey} width={'100%'} controls controlsList="nodownload" onContextMenu={(e) => e.preventDefault()}>
-                                                <source src={`https://6figure-earner.net/LarReApi/public/${(locale==='ar')? LessonInput.video :LessonInput[`video_${locale}`]}`} />
+                                                <source src={`http://127.0.0.1:8000/${(locale==='ar')? LessonInput.video :LessonInput[`video_${locale}`]}`} />
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>

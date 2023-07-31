@@ -31,7 +31,6 @@ const SignUp = () => {
         email :registerInput.email,
         password :registerInput.password,
     }
-
     const handleInput=(e)=>{
         e.persist(); 
         setRegister({...registerInput,[e.target.name]:e.target.value});
@@ -43,27 +42,31 @@ const SignUp = () => {
           //CHECK IF PASSWORD EQUAL CONFIRM PASSWORD  
         if(registerInput.password === registerInput.confPassword){
             axios.get(`/sanctum/csrf-cookie`).then(response=>{
+
                 axios.post(`/api/register-customer`,data).then(res=>{
                     if(res.data.status===200){
                         console.log(res.data.message);
-                         localStorage.setItem('auth_token',res.data.token);
-                         localStorage.setItem('auth_token',res.data.fname); 
-                         swal('Registered successfully\n your Link is: ',(res.data.link),"success");                     
-                         setRegister({
+                        localStorage.setItem('auth_token',res.data.token);
+                        localStorage.setItem('auth_token',res.data.fname); 
+                        localStorage.setItem('link',res.data.link); 
+                        localStorage.setItem('username',res.data.username); 
+                         /* swal('Registered successfully\n your Link is: ',(res.data.link),"success"); */                     
+                        setRegister({
                             username:'',
                             fname:'',
                             lname:'',
                             email:'',
                             password:'',
                             error_list:[]
-                          }); 
-                          setErrorCont(''); 
-                          router.push('/login');
+                        }); 
+                        setErrorCont(''); 
+                        router.push('/pay');
                     }else{
-                         setRegister({...registerInput,error_list:res.data.validation_errors})    
+                        setRegister({...registerInput,error_list:res.data.validation_errors})    
                         console.log(res.data.validation_errors);                 
                     }
                 })
+                
             })
         }else{
             setErrorCont('password not match wit Confirm password');
@@ -74,14 +77,20 @@ const SignUp = () => {
         
     }
 
+
+    const attendedBy = router.query.attendedBy;
     useEffect(()=>{
+        if ( typeof attendedBy !== '') {            
+            console.log(attendedBy);
+            localStorage.setItem('attendedBy', attendedBy);
+        }
         //for translation 
         async function fetchTranslations() {
             const translations = await getDictionary(locale);
             setTranslations(translations);
         }
         fetchTranslations();
-    },[]);
+    },[attendedBy, locale]);
 
 
     return (

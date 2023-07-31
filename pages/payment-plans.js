@@ -24,6 +24,6 @@ const PaymentPlans = () => {
         <Footer />
       </div>
     );
-  };
+};
   
-  export default PaymentPlans;
+export default PaymentPlans;

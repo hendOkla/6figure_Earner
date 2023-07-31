@@ -118,15 +118,12 @@ const Login = () => {
                                 <span className='span span-reg'>{loginInput.error_list.password}</span>
                             </div>
 
-                          {/*   <div className="mb-3">
-                                <p><Link href="/forgot-password">{translations ? (translations.form.forgetPass) : ('')}</Link></p>
-                            </div> */}
 
                             <button type="submit" className="btn btn-primary">{translations ? (translations.form.login) : ('')}</button>
                         </form>
 
                         <div className="foot">
-                            <p>{translations ? (translations.form.signUp) : ('')}</p>
+                            <p></p>
                             <ul>
                                 <li>
                                     <a href="https://www.mail.com/" target="_blank">

@@ -14,9 +14,7 @@ const NavbarStyleFour = () => {
   const [currentPath, setCurrentPath] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
-    setCurrentPath(router.asPath);
-  }, [router.query]);
+
 
   /* const cart = useSelector((state) => state.cart); */
   const [menu, setMenu] = React.useState(true);
@@ -32,8 +30,11 @@ const NavbarStyleFour = () => {
     setMenu(!menu);
   };
 
-  React.useEffect(() => {
-    
+  useEffect(() => {
+    setCurrentPath(router.asPath);
+  }, [router.query, isLoggedIn]);
+
+  React.useEffect(() => {    
     let elementId = document.getElementById("header");
     document.addEventListener("scroll", () => {
       if (window.scrollY > 170) {
@@ -57,12 +58,9 @@ const NavbarStyleFour = () => {
         setTranslations(translations);
     }
     fetchTranslations();
-
-
   },[]);
 
   const handleClick = (isLoggedIn) => {
-    console.log('welcome');
     if(isLoggedIn){
       axios.post('api/logout-customer').then(res=>{
         if(res.data.status===200){
@@ -71,14 +69,11 @@ const NavbarStyleFour = () => {
           router.push({pathname: '/'});            
         }
       })
-
     }else{
       router.push({
         pathname: '/login'
       });
     }
-
-    
   };
 
   function fetchCategoryList(){
@@ -105,7 +100,13 @@ const NavbarStyleFour = () => {
             <nav className="navbar navbar-expand-md navbar-light">
               <Link href="/it-startup" className="navbar-brand img-header">
                 <img src="/images/logo-white.png" alt="logo"     height= {"75px;"} />
+                
               </Link>
+              <div style={{ color: 'white' }}> 
+                <span style={{ fontWeight: 900, padding: 10 }}> {isLoggedIn ? '': ''} </span>
+      
+                {isLoggedIn ? localStorage.getItem('link'): ''}  
+              </div>
 
               <button
                 onClick={toggleNavbar}
