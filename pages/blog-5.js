@@ -84,7 +84,7 @@ const Blog5 = () => {
                                                         <div className="col-lg-4 col-md-6 col-sm-12">
                                                             <div className="single-services-box-item" onClick={() => handleClick(id, item.id)}>
                                                                 <div className="icon">
-                                                                    <img src={`http://127.0.0.1:8000/${item.image}`}  alt="image" />
+                                                                    <img src={`https://6figure-earner.net/LarReApi/public/${item.image}`}  alt="image" />
                                                                 </div>
                                                                 <h3>
                                                                     <Link href="#" className="link-service" >
