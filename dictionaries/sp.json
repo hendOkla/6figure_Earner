@@ -60,7 +60,9 @@
         "fname" : "First Name" ,
         "lname" : "Last Name" ,
         "confpass" : "Confirm Password",
-        "haveAccount": "Already have an account yet?"
+        "haveAccount": "Already have an account yet?",
+        "digitalBook" : "Digital Book"
+
 
         
     

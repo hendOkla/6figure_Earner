@@ -14,6 +14,7 @@ const Blog5 = () => {
     const { id } = router.query;
     const { cat } = router.query;
     const [curseList,setCurseList] = useState([]);
+    const [curseListBook,setCurseListBook] = useState([]);
 
 
 
@@ -29,6 +30,7 @@ const Blog5 = () => {
             router.push({pathname: '/login'});
         }
         setCurseList([]);       
+        setCurseListBook([]);
         fetchCourseList();    
 
         //for translation 
@@ -40,13 +42,22 @@ const Blog5 = () => {
     },[id]);
 
     function fetchCourseList(){
-        axios.get(`/api/courseWIdCat/${id}`).then(res=>{
+        axios.get(`/api/courseWIdCat`, {params: {id: id,status: 0}} ).then(res=>{
             console.log (id);
             if(res.data.status === 200){
                 setCurseList(res.data.course)
                 console.log(res.data.course);
             }
         });
+        axios.get(`/api/courseWIdCat`, {params: {id: id,status: 1}} ).then(res=>{
+            console.log (id);
+            if(res.data.status === 200){
+                setCurseListBook(res.data.course)
+                console.log(res.data.course);
+            }
+        });
+
+
     } 
 
     const handleClick = (category_id , course_id) => {
@@ -56,6 +67,21 @@ const Blog5 = () => {
         if(localStorage.getItem(`auth_token`)){
             router.push({
                 pathname: '/blog-details',
+                query:{course_id: course_id}
+            });
+        }else{
+            router.push({
+                pathname: '/login'
+            });
+        }
+    };
+    const handleClickBook = (category_id , course_id) => {
+            localStorage.setItem('category_idBook',category_id);
+            localStorage.setItem('course_idBook',course_id);     
+               
+        if(localStorage.getItem(`auth_token`)){
+            router.push({
+                pathname: '/digitalBook',
                 query:{course_id: course_id}
             });
         }else{
@@ -110,6 +136,73 @@ const Blog5 = () => {
                                                 <div className="error-content">
                                                     <div className="notfound-404" >
                                                         <h1 style={{ fontSize: '80px'}}>Not curses found.</h1>
+                                                    </div>
+                                                </div>
+                                            </div>                            
+                                        )
+                                    }
+                                </div>
+                            </div>
+
+                            {/* Shape Images */}
+                            <div className="shape2 rotateme">
+                                <img src="/images/shape2.svg" alt="shape" />
+                            </div>
+                            <div className="shape3">
+                                <img src="/images/shape3.svg" alt="shape" />
+                            </div>
+                            <div className="shape4">
+                                <img src="/images/shape4.svg" alt="shape" />
+                            </div>
+                            <div className="shape6 rotateme">
+                                <img src="/images/shape4.svg" alt="shape" />
+                            </div>
+                            <div className="shape7">
+                                <img src="/images/shape4.svg" alt="shape" />
+                            </div>
+                            <div className="shape8 rotateme">
+                                <img src="/images/shape2.svg" alt="shape" />
+                            </div>
+                        </div>
+                        {/* Book */}
+                        <div className="blog-area ptb-80">
+                            <PageBanner pageTitle={translations.form.digitalBook} /> 
+                            <div className="container">
+                                <div className="row">
+                                    {curseListBook.length ? 
+                                        (
+                                            curseListBook.map((item)=>{
+                                                return(
+                                                    <>
+                                                        <div className="col-lg-4 col-md-6 col-sm-12">
+                                                            <div className="single-services-box-item" onClick={() => handleClickBook(id, item.id)}>
+                                                                <div className="icon">
+                                                                    <img src={`https://6figure-earner.net/LarReApi/public/${item.image}`}  alt="image" />
+                                                                </div>
+                                                                <h3>
+                                                                    <Link href="#" className="link-service" >
+                                                                        {item[`name_${locale}`]}
+                                                                    </Link>
+                                                                </h3>
+                                                                <p>{item[`description_${locale}`]}</p>
+                                                                
+                                                                <Link href="#"  className="learn-more-btn link-service">
+                                                                    <Icon.ArrowRight /> {localStorage.getItem(`auth_token`)?translations.form.buy:translations.form.show}
+                                                                </Link>
+
+                                                                <div className="shape">
+                                                                    <img src="/images/bigdata-analytics/rectangle.png" alt="image" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                )
+                                            })
+                                        ) : (
+                                            <div className="d-table">
+                                                <div className="error-content">
+                                                    <div className="notfound-404" >
+                                                        <h1 style={{ fontSize: '80px'}}>Loading....</h1>
                                                     </div>
                                                 </div>
                                             </div>                            
