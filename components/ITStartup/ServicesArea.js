@@ -26,9 +26,9 @@ const ServicesArea = () => {
                     <div className="row justify-content-center align-items-center">
                         <div className="col-lg-6 col-md-12 services-content">
                             <div className="section-title">
-                                <h2>{translations ? (translations.form.wrProvide) : ('')}</h2>
+                                <h2 >{translations ? (translations.form.wrProvide) : ('')}</h2>
                                 <div className="bar"></div>
-                                <h5>{translations ? (translations.form.sourcesProvider) : ('')} </h5>
+                                <h5 style={{paddingTop: '40px', paddingBottom: '40px' }}>{translations ? (translations.form.sourcesProvider) : ('')} </h5>
                             </div>
 
                             <div className="row">
@@ -208,16 +208,21 @@ const ServicesArea = () => {
 
                         <div className="col-lg-6 col-md-12 services-content">
                             <div className="section-title">
-                                <h2>Lorem Ipsum Dolor Sit Amet</h2>
+                                <h1 style={{paddingTop: '40px', paddingBottom: '40px' }}>{translations ? (translations.form.mainGoul) : ('')}</h1>
                                 <div className="bar"></div>
-                                <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h6>
                             </div>
 
                             <div className="row">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                </p>
-                            </div>
+                                <h4 style={{color: '#04d5f5'}}>{translations ? (translations.form.FirstMission) : ('')}</h4>
+                            </div><br></br><br></br>
+
+                            <div className="row">
+                                <h4 style={{color: '#04d5f5'}}>{translations ? (translations.form.secondMission) : ('')}</h4>
+                            </div><br></br><br></br>
+
+                            <div className="row">
+                                <h4 style={{color: '#04d5f5'}}>{translations ? (translations.form.TherdMission) : ('')}</h4>
+                            </div><br></br><br></br>
                         </div>
                     </div>
                 </div>

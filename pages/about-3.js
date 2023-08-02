@@ -62,14 +62,14 @@ const About3 = () => {
                 <div className="container">
                     <div className="about-inner-area">
                         <div className="row justify-content-center">
-                            <div className="col-lg-4 col-md-6 col-sm-6">
+                           {/*  <div className="col-lg-4 col-md-6 col-sm-6">
                                 <div className="about-text">
                                     <h3>{translations ? (translations.form.ourHistory) : ('')}</h3>
                                     <p>Lorem ipsum dolor sit amet, con se ctetur adipiscing elit. In sagittis eg esta ante, sed viverra nunc tinci dunt nec elei fend et tiram.</p>
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className="col-lg-4 col-md-6 col-sm-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="about-text">
                                     <h3>{translations ? (translations.form.ourMission) : ('')}</h3>
                                     <p>{translations ? (translations.form.FirstMission) : ('')}</p>
@@ -78,7 +78,7 @@ const About3 = () => {
                                 </div>
                             </div>
 
-                            <div className="col-lg-4 col-md-6 col-sm-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="about-text">
                                 
                                     <h3>{translations ? (translations.form.howWe) : ('')}</h3>

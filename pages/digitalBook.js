@@ -2,14 +2,9 @@ import React,{ useState, useEffect } from 'react';
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import PageBanner from '@/components/Common/PageBanner'; 
-import * as Icon from 'react-feather';
-import BlogSidebar from '@/components/Blog/BlogSidebar';
 import { useRouter } from 'next/router';
 import { getDictionary } from "getDictionary";
-
 import axios from "axios";
-
-
 
 
 
@@ -40,18 +35,20 @@ const digitalBook = () => {
             }
         });
         
-
-
         //for translation 
         async function fetchTranslations() {
             const translations = await getDictionary(locale);
             setTranslations(translations);
         }
         fetchTranslations();
-        
+
+
+      
         
     },[course_id]);
 
+
+    
     
 
 
@@ -72,8 +69,11 @@ const digitalBook = () => {
                                                 <div className="container">
                                                     <div className="row">
                                                         <div className="col-lg-12 col-md-12">
-
-                                                           
+                                                      
+            
+            
+                                                            
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

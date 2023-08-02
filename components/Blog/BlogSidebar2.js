@@ -63,7 +63,7 @@ const BlogSidebar2 = () => {
                                                 <article className="item">
                                                     <Link href="#" className="thumbS" width={'150px'}>
                                                         <video key={videoKey} width={'150px'} controls controlsList="nodownload" onContextMenu={(e) => e.preventDefault()}>
-                                                            <source src={`https://6figure-earner.net/LarReApi/public/${(locale==='ar')?item.video:item[`video_${locale}`]}`} />
+                                                            <source src={`http://127.0.0.1:8000/${(locale==='ar')?item.video:item[`video_${locale}`]}`} />
                                                             Your browser does not support the video tag.
                                                         </video>
                                                     </Link>

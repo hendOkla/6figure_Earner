@@ -50,6 +50,8 @@ const SignUp = () => {
                         localStorage.setItem('auth_token',res.data.fname); 
                         localStorage.setItem('link',res.data.link); 
                         localStorage.setItem('username',res.data.username); 
+                        localStorage.setItem('email',registerInput.email); 
+                        localStorage.setItem('password',registerInput.password); 
                          /* swal('Registered successfully\n your Link is: ',(res.data.link),"success"); */                     
                         setRegister({
                             username:'',

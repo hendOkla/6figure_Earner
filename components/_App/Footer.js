@@ -35,10 +35,7 @@ const Footer = () => {
                   </Link>
                 </div>
                 <p className="p-footer">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi.
+                {translations ? (translations.form.Footer_para) : ('')}
                 </p>
               </div>
             </div>
@@ -55,21 +52,21 @@ const Footer = () => {
                 <h3>{translations ? (translations.form.address) : ('')}</h3>
 
                 <ul className="footer-contact-info">
-                  <li>
+                  {/* <li>
                     <Icon.MapPin />
                     27 Division St, New York, <br /> NY 10002, USA
-                  </li>
+                  </li> */}
                   <li>
                     <Icon.Mail />
                     Email:{" "}
-                    <a href="mailto:startp@gmail.com">startp@gmail.com</a>
+                    <a href="mailto:6figure@6figure-earner.net">6figure@6figure-earner.net</a>
                   </li>
-                  <li>
+                  {/* <li>
                     <Icon.PhoneCall />
                     Phone: <a href="tel:321984754">+ (321) 984 754</a>
-                  </li>
+                  </li> */}
                 </ul>
-                <ul className="social-links">
+               {/*  <ul className="social-links">
                   <li>
                     <a
                       href="https://www.facebook.com/"
@@ -106,7 +103,7 @@ const Footer = () => {
                       <Icon.Linkedin />
                     </a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
 
@@ -115,7 +112,7 @@ const Footer = () => {
                 <p>
                   Copyright &copy; {currentYear} StartP. All rights reserved by{" "}
                   <a href="#" target="_blank">
-                    IT-Homs
+                    IT-Developer
                   </a>
                 </p>
               </div>
