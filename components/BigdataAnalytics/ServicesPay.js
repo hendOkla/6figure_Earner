@@ -128,7 +128,7 @@ export default function ServicesPay() {
                         checkout({
                             lineItems: [
                             {
-                                price: 'price_1NZhJqD9XEKkDfreNETxpEtr',
+                                price: 'price_1NZ92nD9XEKkDfre5w75hHES',
                                 quantity: 1,
                             },
                             ],
@@ -161,7 +161,7 @@ export default function ServicesPay() {
                       checkout({
                         lineItems: [
                           {
-                            price: 'price_1NZ92nD9XEKkDfre5w75hHES',
+                            price: 'price_1Na5sED9XEKkDfrehrd8l9CG',
                             quantity: 1,
                           },
                         ],
