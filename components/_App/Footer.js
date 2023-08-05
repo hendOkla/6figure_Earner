@@ -59,7 +59,7 @@ const Footer = () => {
                   <li>
                     <Icon.Mail />
                     Email:{" "}
-                    <a href="mailto:6figure@6figure-earner.net">6figure@6figure-earner.net</a>
+                    <a href="mailto:6figure-earner@6figure-earner.net">6figure-earner@6figure-earner.net</a>
                   </li>
                   {/* <li>
                     <Icon.PhoneCall />

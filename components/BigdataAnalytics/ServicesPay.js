@@ -36,7 +36,6 @@ export default function ServicesPay() {
       const plan = localStorage.getItem('paymentPlan'); 
       const amount = localStorage.getItem('amount'); 
       const attendedBy = localStorage.getItem('attendedBy');      
-
       const email = localStorage.getItem('email');      
       const password = localStorage.getItem('password');    
   
@@ -54,13 +53,15 @@ export default function ServicesPay() {
         };
         if(showStatus==='success'){
           axios.post(`/api/payment`,data).then(res=>{
-            if(res.data.status ===200){     
-                const mailData = {
-                  username:username,
-                  email:email,
-                  link: link,
-                  password: password,                  
-                }
+            if(res.data.status ===200){                
+              //send mail for user registered
+              const mailData = {
+                username:username,
+                email:email,
+                link: link,
+                password: password,                  
+              }
+
               fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
@@ -73,17 +74,51 @@ export default function ServicesPay() {
                   if (data.status===200) {
                     axios.post(`/api/updateCustomStatus/${username}`).then(ress=>{
                       if(ress.status ===200){
-                        swal("Success",res.data.message,"success");
+                            //get user who attended by he
+                          axios.get(`/api/getCEmail/${attendedBy}`,data).then(resEmail=>{
+                            if(resEmail.data.email){
+
+                              //send mail for user registered
+                              const reMailData = {
+                                username:attendedBy,
+                                email:resEmail.data.email,
+                                newUser:username                                            
+                              }
+
+                              fetch('/api/receive-email', {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ reMailData }),
+                              })
+                                .then(responseMail => responseMail.json())
+                                .then(data => {
+                                  if (data.status===200) {                       
+                                    swal("Success",`Ready to show videos,Please check your mail......`,"success");  
+                                    router.push('/'); 
+                                  } else {
+                                    swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
+                                  }
+                              }); 
+                            }
+
+                          });
                       }else{
                         swal("Error",res.data.error,"error");
                       }
-                    });
-                    swal("Success",`Ready to show videos,Please check your mail......`,"success");  
-                    router.push('/'); 
+                    }); 
                   } else {
                     swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
                   }
               });
+
+
+
+
+
+
+
             }else if(res.data.status === 400){
                 swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
             }

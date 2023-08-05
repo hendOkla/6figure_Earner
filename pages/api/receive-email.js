@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 
 export default async function (req, res) {
     // Your code here
-    const { mailData } = req.body;
+    const { reMailData } = req.body;
 
     const transporter = nodemailer.createTransport({
         host: 'server.it-homs.com',
@@ -18,8 +18,8 @@ export default async function (req, res) {
 
     const message = {
         from: '6figure-earner@6figure-earner.net',
-        to: mailData.email,
-        subject: 'Successfully Register',
+        to: reMailData.email,
+        subject: `Your share link has been used by  ${reMailData.newUser}`,
         html: 
         `<!DOCTYPE html>
         <html>
@@ -155,36 +155,12 @@ export default async function (req, res) {
                         <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                             <tr>
                                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                                    <p>Hello  ${mailData.username}</p>
-                                    <p style="margin: 0;">.Thanks for signing up to <spam  style="font-size: x-large;font-weight: bold;margin-left: 5px;margin-right: 5px;color: #ff6926;">6figure-earner</spam> site</p>
-                                    <p>Your account has been activated</p>
-                                    <p>Your username is: ${mailData.username}</p>
-                                    <p>Your password is: ${mailData.password}</p>
-                                    <p>Your Share link is:
-                                        <a href="${mailData.link}" target="_blank" style="color: #FFA73B;">${mailData.link}</a>
-                                    </p>
-        
-                                   
+                                    <p>Hello  ${reMailData.username}</p>                                    
+                                    <p>${reMailData.newUser} has joined us through your share link.</p>
+                                    <p>You can lose your personal account</p>                                   
                                 </td>
                             </tr>
         
-                            <tr>
-                                <td bgcolor="#ffffff" align="left">
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
-                                                <table border="0" cellspacing="0" cellpadding="0">
-                                                    <tr>
-                                                        <td align="center" style="border-radius: 3px;" bgcolor="#FFA73B">
-                                                            <a href="https://www.6figure-earner.world/login/" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #FFA73B; display: inline-block; background: linear-gradient(135deg, #ff389f -11%, #ff7800 100%);">Confirm Account</a>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr> <!-- COPY -->                   
                             <tr>
                                 <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                                     <p style="margin: 0;">If you have any questions, just reply to this email&mdash;we're always happy to help out.</p>
