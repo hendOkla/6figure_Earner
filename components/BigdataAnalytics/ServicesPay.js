@@ -148,7 +148,7 @@ export default function ServicesPay() {
                 </div>
                 <div className="price">
                   <span>
-                    <sup>$</sup>1.00{' '}
+                    <sup>$</sup>350.00{' '}
                   </span>
                 </div>
                 <div className="pricing-features">
@@ -159,11 +159,11 @@ export default function ServicesPay() {
                     className="btn btn-primary"
                     onClick={() => {
                         paymentPlan('Standard');
-                        amountPlan('1');
+                        amountPlan('350');
                         checkout({
                             lineItems: [
                             {
-                                price: 'price_1NZ92nD9XEKkDfre5w75hHES',
+                                price: 'price_1NbooZD9XEKkDfreV8GpIshg',
                                 quantity: 1,
                             },
                             ],
