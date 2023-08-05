@@ -157,7 +157,9 @@ export default async function (req, res) {
                                 <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                                     <p>Hello  ${reMailData.username}</p>                                    
                                     <p>${reMailData.newUser} has joined us through your share link.</p>
-                                    <p>You can lose your personal account</p>                                   
+                                    <p> You will get 15% every time ${reMailData.newUser} renews his monthly subscription....</p>
+                                    <p>You can lose your personal account</p>
+                                    <p>Please make sure ${reMailData.newUser} knows how to log into his admin office and start his journey</p>                                   
                                 </td>
                             </tr>
         
