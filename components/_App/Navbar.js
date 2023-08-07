@@ -32,9 +32,8 @@ const NavbarStyleFour = () => {
 
   useEffect(() => {
     setCurrentPath(router.asPath);
-  }, [router.query, isLoggedIn]);
 
-  React.useEffect(() => {    
+
     let elementId = document.getElementById("header");
     document.addEventListener("scroll", () => {
       if (window.scrollY > 170) {
@@ -51,21 +50,30 @@ const NavbarStyleFour = () => {
       }
     } 
     fetchCategoryList(); 
-
       //for translation 
       async function fetchTranslations() {
         const translations = await getDictionary(locale);
         setTranslations(translations);
     }
     fetchTranslations();
-  },[]);
+
+
+
+
+
+
+  }, [router.query, isLoggedIn]);
+
+
+  
 
   const handleClick = (isLoggedIn) => {
     if(isLoggedIn){
       axios.post('api/logout-customer').then(res=>{
         if(res.data.status===200){
-          localStorage.removeItem('auth_token');
-          localStorage.removeItem('auth_token');
+          /* localStorage.removeItem('auth_token');
+          localStorage.removeItem('auth_token'); */
+          window.localStorage.clear();
           router.push({pathname: '/'});            
         }
       })
@@ -103,8 +111,7 @@ const NavbarStyleFour = () => {
                 
               </Link>
               <div style={{ color: 'white' }}> 
-                <span style={{ fontWeight: 900, padding: 10 }}> {isLoggedIn ? '': ''} </span>
-      
+                <span style={{ fontWeight: 900, padding: 10 }}> {isLoggedIn ? '': ''} </span>      
                 {isLoggedIn ? localStorage.getItem('link'): ''}  
               </div>
 
@@ -190,7 +197,9 @@ const NavbarStyleFour = () => {
 
               {/* Others option */}
               <div className="others-option">
-                <button href="/contact/" onClick={() => handleClick(isLoggedIn)} className="btn btn-primary">{isLoggedIn ? (translations ? (translations.form.logOut) : ('')) : (translations ? (translations.form.login) : (''))} </button>
+                <button href="/contact/" onClick={() => handleClick(isLoggedIn)} className="btn btn-primary">
+                  {isLoggedIn ? (translations ? (translations.form.logOut) : ('')) : (translations ? (translations.form.login) : (''))} 
+                </button>
               </div>
             </nav>
           </div>

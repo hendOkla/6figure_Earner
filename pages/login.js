@@ -44,6 +44,7 @@ const Login = () => {
                         localStorage.setItem('auth_token',res.data.fname); 
                         localStorage.setItem('username',res.data.username);
                         localStorage.setItem('link',res.data.link); 
+
                         swal("Success",res.data.message,"success"); 
                         if(localStorage.getItem(`course_id`)!==null){
                             router.push({pathname: '/blog-details' , query: { id: localStorage.getItem(`course_id`) }});
