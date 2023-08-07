@@ -47,10 +47,10 @@ const SignUp = () => {
                     if(res.data.status===200){
                         console.log(res.data.message);
                         localStorage.setItem('auth_token',res.data.token);
-                        localStorage.setItem('auth_token',res.data.fname); 
-                        localStorage.setItem('link',res.data.link); 
+                        localStorage.setItem('auth_token',res.data.fname);                          
                         localStorage.setItem('username',res.data.username); 
                         localStorage.setItem('email',registerInput.email); 
+                        localStorage.setItem('link',res.data.link);
                         localStorage.setItem('password',registerInput.password); 
                          /* swal('Registered successfully\n your Link is: ',(res.data.link),"success"); */                     
                         setRegister({
