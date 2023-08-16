@@ -33,20 +33,27 @@ export default function ServicesPay() {
 
     const { query } = useRouter();
 
+    const [email, setEmail] = useState('');
+
 
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
-    const email = localStorage.getItem('email');      
-
+    
+    
 
 
     useEffect(() => {
       const username = localStorage.getItem('username');
       const link = localStorage.getItem('link');
+      const storedEmail = localStorage.getItem('email');
       const plan = localStorage.getItem('paymentPlan'); 
       const amount = localStorage.getItem('amount'); 
       const attendedBy = localStorage.getItem('attendedBy');      
-      const password = localStorage.getItem('password');    
+      const password = localStorage.getItem('password');  
+      
+      if (storedEmail) {
+        setEmail(storedEmail);
+      }
   
       
       if(!username){
