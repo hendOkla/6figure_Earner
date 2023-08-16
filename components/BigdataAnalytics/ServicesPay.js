@@ -95,7 +95,7 @@ export default function ServicesPay() {
                           axios.get(`/api/getCEmail/${attendedBy}`,data).then(resEmail=>{
                             if(resEmail.data.email){
 
-                              //send mail for user registered TEST HEND
+                              //send mail for user registered TEST HEND ANd Hanadi
                               const reMailData = {
                                 username:attendedBy,
                                 email:resEmail.data.email,
