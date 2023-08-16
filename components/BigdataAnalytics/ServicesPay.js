@@ -36,6 +36,7 @@ export default function ServicesPay() {
 
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
+    const email = localStorage.getItem('email');      
 
 
 
@@ -45,7 +46,6 @@ export default function ServicesPay() {
       const plan = localStorage.getItem('paymentPlan'); 
       const amount = localStorage.getItem('amount'); 
       const attendedBy = localStorage.getItem('attendedBy');      
-      const email = localStorage.getItem('email');      
       const password = localStorage.getItem('password');    
   
       
