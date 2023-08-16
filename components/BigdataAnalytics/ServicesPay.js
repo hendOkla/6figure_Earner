@@ -182,10 +182,10 @@ export default function ServicesPay() {
                   </button> */}
 
               <form action="/api/checkout_sessions" method="POST">
-                <section></section>
+                <section>
               
               
-                  <input type="email" name="email" value="{{email}}" required />
+                  <input type="email" name="email" value="eng.hend@gmail.com" required />
                   <button type="submit" name="amount" value="350" role="link" >Checkout</button>
                   <button type="submit" name="amount"value ="600" role="link" >Welcome Checkout</button>
                 </section>
