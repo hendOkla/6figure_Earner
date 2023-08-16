@@ -145,6 +145,7 @@ export default function ServicesPay() {
     }, [showStatus]);
 
   return (
+    
     <>
       <div className="bigdata-services-area ptb-80 bg-eef6fd">
         <div className="container">
