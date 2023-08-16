@@ -139,100 +139,93 @@ export default function ServicesPay() {
 
   return (
     <>
-      <div className="bigdata-services-area ptb-80 bg-eef6fd">
-        <div className="container">
-          <div className="section-title">
-            <h2>Our special packages</h2>
-            <div className="bar"></div>
-            <p>
-              You can choose the package that suits you and enjoy the experience
-              with us
-            </p>
-          </div>
-          <div className="row justify-content-center">
-            <div className="col-lg-4 col-md-6">
-              <div className="pricing-table">
-                <div className="pricing-header">
-                  <h3>6FE Standard</h3>
+      <form action="/api/checkout_sessions" method="POST">
+        <section> 
+        <input type="email" name="email" value={email} required />
+          <div className="bigdata-services-area ptb-80 bg-eef6fd">
+            <div className="container">
+              <div className="section-title">
+                <h2>Our special packages</h2>
+                <div className="bar"></div>
+                <p>
+                  You can choose the package that suits you and enjoy the experience
+                  with us
+                </p>
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-lg-4 col-md-6">
+                  <div className="pricing-table">
+                    <div className="pricing-header">
+                      <h3>6FE Standard</h3>
+                    </div>
+                    <div className="price">
+                      <span>
+                        <sup>$</sup>350.00{' '}
+                      </span>
+                    </div>
+                    <div className="pricing-features">
+                      <ul></ul>
+                    </div>
+                    <div className="pricing-footer">
+    {/*                   <button
+                        className="btn btn-primary"
+                        onClick={() => {
+                            paymentPlan('Standard');
+                            amountPlan('350');
+                            checkout({
+                                lineItems: [
+                                {
+                                    price: 'price_1NbooZD9XEKkDfreV8GpIshg',
+                                    quantity: 1,
+                                },
+                                ],
+                            });
+                        }}
+                      >BUY
+                      </button> */}
+                      <button className="btn btn-primary"  type="submit" name="amount" value="350" role="link" >6F Standard</button>
+                    </div>
+                  </div>
                 </div>
-                <div className="price">
-                  <span>
-                    <sup>$</sup>350.00{' '}
-                  </span>
-                </div>
-                <div className="pricing-features">
-                  <ul></ul>
-                </div>
-                <div className="pricing-footer">
-{/*                   <button
-                    className="btn btn-primary"
-                    onClick={() => {
-                        paymentPlan('Standard');
-                        amountPlan('350');
-                        checkout({
+                <div className="col-lg-4 col-md-6">
+                  <div className="pricing-table">
+                    <div className="pricing-header">
+                      <h3>6FE Pro</h3>
+                    </div>
+                    <div className="price">
+                      <span>
+                        <sup>$</sup>600.00{' '}
+                      </span>
+                    </div>
+                    <div className="pricing-features">
+                      <ul></ul>
+                    </div>
+                    <div className="pricing-footer">
+    {/*                   <button
+                        className="btn btn-primary"
+                        onClick={() => {
+                        paymentPlan('Pro');
+                        amountPlan('600');
+                          checkout({
                             lineItems: [
-                            {
-                                price: 'price_1NbooZD9XEKkDfreV8GpIshg',
+                              {
+                                price: 'price_1Na5sED9XEKkDfrehrd8l9CG',
                                 quantity: 1,
-                            },
+                              },
                             ],
-                        });
-                    }}
-                  >BUY
-                  </button> */}
-
-              <form action="/api/checkout_sessions" method="POST">
-                <section>
-              
-              
-                  <input type="email" name="email" value="eng.hend@gmail.com" required />
-                  <button type="submit" name="amount" value="350" role="link" >Checkout</button>
-                  <button type="submit" name="amount"value ="600" role="link" >Welcome Checkout</button>
-                </section>
-              </form>  
-
-
-
-
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6">
-              <div className="pricing-table">
-                <div className="pricing-header">
-                  <h3>6FE Pro</h3>
-                </div>
-                <div className="price">
-                  <span>
-                    <sup>$</sup>600.00{' '}
-                  </span>
-                </div>
-                <div className="pricing-features">
-                  <ul></ul>
-                </div>
-                <div className="pricing-footer">
-{/*                   <button
-                    className="btn btn-primary"
-                    onClick={() => {
-                    paymentPlan('Pro');
-                    amountPlan('600');
-                      checkout({
-                        lineItems: [
-                          {
-                            price: 'price_1Na5sED9XEKkDfrehrd8l9CG',
-                            quantity: 1,
-                          },
-                        ],
-                      });
-                    }}
-                  >BUY
-                  </button> */}
+                          });
+                        }}
+                      >BUY
+                      </button> */}
+                      <button className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >6F Pro</button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </form>  
     </>
   );
 }
