@@ -22,24 +22,33 @@ export default function ServicesPay() {
 
     const [email, setEmail] = useState('');
     const [amount, setAmount] = useState('');
+    const [plan, setPlan] = useState('');
 
 
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
+
+    
     
     
 
 
     useEffect(() => {
+
+      if(amount==350){
+        setPlan('Standard');
+      }else{
+        setPlan('Pro');
+      }
+
+
+
       const username = localStorage.getItem('username');
       const link = localStorage.getItem('link');
       const storedEmail = localStorage.getItem('email');
       const attendedBy = localStorage.getItem('attendedBy');      
       const password = localStorage.getItem('password');  
       const sendEmail = localStorage.getItem('email');
-
-      const amount = '350';
-      const plan = 'standard';
 
       localStorage.setItem('amount', amount);
       const storedAmount = localStorage.getItem('amount');
