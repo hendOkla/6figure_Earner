@@ -56,7 +56,7 @@ export default function ServicesPay() {
       if(!username){
         router.push('/sign-up/');
       }else{
-        const data = {
+       /*  const data = {
           username: username,
           attendedBy: attendedBy,
           amount: amount,
@@ -142,7 +142,21 @@ export default function ServicesPay() {
     
         if (query.get('canceled')) {
           swal("Error",`An error occurred, try again please...`,"error"); 
-        }          
+        }           */
+
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('success')) {
+          swal("success",`Order placed! You will receive an email confirmation.`,"success"); 
+        }
+    
+        if (query.get('canceled')) {
+          swal("Error",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
+
+        }
+
+
+
+
       }
     }, [showStatus]);
 
