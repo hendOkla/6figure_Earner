@@ -38,8 +38,8 @@ const { email , amount } = req.body;
         ],
         mode: 'payment',
         allow_promotion_codes: true,
-        successUrl: `${window.location.origin}/pay?session_id={CHECKOUT_SESSION_ID}&status=${encodeURIComponent('success')}`,
-        cancelUrl: `${window.location.origin}/sign-up/`,
+        success_url: `${window.location.origin}/pay?session_id={CHECKOUT_SESSION_ID}&status=${encodeURIComponent('success')}`,
+        cancel_url: `${window.location.origin}/sign-up/`,
       });
       res.redirect(303, session.url);
     } catch (err) {

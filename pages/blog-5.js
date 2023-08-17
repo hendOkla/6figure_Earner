@@ -135,7 +135,7 @@ const Blog5 = () => {
                                             <div className="d-table">
                                                 <div className="error-content">
                                                     <div className="notfound-404" >
-                                                        <h1 style={{ fontSize: '80px'}}>Not curses found.</h1>
+                                                        <h1 style={{ fontSize: '80px'}}>Loading....</h1>
                                                     </div>
                                                 </div>
                                             </div>                            
