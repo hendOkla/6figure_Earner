@@ -24,6 +24,17 @@ export default function ServicesPay() {
 
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
+
+
+    const handleButtonClick = (value) => {
+      
+      localStorage.setItem('amount',value);
+      if(value=="350"){
+        localStorage.setItem('plan',"Standard");
+      }else{
+        localStorage.setItem('plan',"Pro");
+      }
+    };
     
     
 
@@ -36,11 +47,11 @@ export default function ServicesPay() {
       const password = localStorage.getItem('password');  
       const sendEmail = localStorage.getItem('email');
 
-      const amount= '350'; 
-      const plan = 'standard';
+      const amount= localStorage.getItem('amount');
+      const plan = localStorage.getItem('plan');
 
 
-      
+ 
 
 
 
@@ -187,7 +198,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button onClick={() => handleButtonClick("350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -205,7 +216,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button onClick={() => handleButtonClick("600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
