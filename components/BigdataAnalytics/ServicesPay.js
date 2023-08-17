@@ -4,7 +4,6 @@ import Link from 'next/link';
 import StripeCheckout from 'react-stripe-checkout';
 import swal from 'sweetalert';
 import axios from 'axios';
-/* import { checkout } from '../../checkout'; */
 
 
 import { loadStripe } from '@stripe/stripe-js';
