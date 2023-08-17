@@ -18,13 +18,6 @@ const stripePromise = loadStripe(
 export default function ServicesPay() {
     const router = useRouter();
 
-    function paymentPlan(newPlan) {
-    localStorage.setItem('paymentPlan',newPlan);
-    };
-    function amountPlan(amount) {
-    localStorage.setItem('amount',amount);
-    };
-
     const { query } = useRouter();
 
     const [email, setEmail] = useState('');
@@ -36,20 +29,21 @@ export default function ServicesPay() {
     
 
 
-    React.useEffect(() => {
+    useEffect(() => {
       const username = localStorage.getItem('username');
       const link = localStorage.getItem('link');
       const storedEmail = localStorage.getItem('email');
-      const plan = localStorage.getItem('paymentPlan'); 
-      const amount = localStorage.getItem('amount'); 
       const attendedBy = localStorage.getItem('attendedBy');      
       const password = localStorage.getItem('password');  
+
+      const amount = query.get('amount');
+      const plan = query.get('productName');
 
       if (storedEmail) {
         setEmail(storedEmail);
       }
-      console.log('welcome'+email);
-      console.log('welcome storedEmail'+link);
+
+      
 
       
 
@@ -61,14 +55,16 @@ export default function ServicesPay() {
        
         const query = new URLSearchParams(router.asPath.split('?')[1]);
         if (query.get('success')) {
-          const data = {
-            username: username,
-            attendedBy: attendedBy,
-            amount: amount,
-            paymentPlan: plan,
-            email: email,
-            password: password
-          };
+
+          try {
+            const data = {
+              username: username,
+              attendedBy: attendedBy,
+              amount: amount,
+              paymentPlan: plan,
+              email: email,
+              password: password
+            };
             axios.post(`/api/payment`,data).then(res=>{
               if(res.data.status ===200){                
                 //send mail for user registered
@@ -78,7 +74,7 @@ export default function ServicesPay() {
                   link: link,
                   password: password,                  
                 }
-
+  
                 fetch('/api/send-email', {
                   method: 'POST',
                   headers: {
@@ -94,14 +90,14 @@ export default function ServicesPay() {
                               //get user who attended by he
                             axios.get(`/api/getCEmail/${attendedBy}`,data).then(resEmail=>{
                               if(resEmail.data.email){
-
+  
                                 //send mail for user registered
                                 const reMailData = {
                                   username:attendedBy,
                                   email:resEmail.data.email,
                                   newUser:username                                            
                                 }
-
+  
                                 fetch('/api/receive-email', {
                                   method: 'POST',
                                   headers: {
@@ -119,7 +115,7 @@ export default function ServicesPay() {
                                     }
                                 }); 
                               }
-
+  
                             });
                         }else{
                           swal("Error",res.data.error,"error");
@@ -129,17 +125,17 @@ export default function ServicesPay() {
                       swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
                     }
                 });
-
-
+  
+  
               }else if(res.data.status === 400){
                   swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
               } 
             }); 
-        
-            swal("success",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
-
-        
-        
+            
+          } catch (error) {
+            swal("Error",`Something went wrong, please contact our support team`,"error"); 
+          }
+          
         }
     
         if (query.get('canceled')) {
@@ -180,22 +176,6 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-    {/*                   <button
-                        className="btn btn-primary"
-                        onClick={() => {
-                            paymentPlan('Standard');
-                            amountPlan('350');
-                            checkout({
-                                lineItems: [
-                                {
-                                    price: 'price_1NbooZD9XEKkDfreV8GpIshg',
-                                    quantity: 1,
-                                },
-                                ],
-                            });
-                        }}
-                      >BUY
-                      </button> */}
                       <button className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
@@ -214,22 +194,6 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-    {/*                   <button
-                        className="btn btn-primary"
-                        onClick={() => {
-                        paymentPlan('Pro');
-                        amountPlan('600');
-                          checkout({
-                            lineItems: [
-                              {
-                                price: 'price_1Na5sED9XEKkDfrehrd8l9CG',
-                                quantity: 1,
-                              },
-                            ],
-                          });
-                        }}
-                      >BUY
-                      </button> */}
                       <button className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
