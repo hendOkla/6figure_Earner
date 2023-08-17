@@ -38,7 +38,7 @@ const { email , amount } = req.body;
         ],
         mode: 'payment',
         allow_promotion_codes: true,
-        success_url:`${req.headers.origin}/pay?success=true&amount=${amount}&productName=${productName}`,
+        success_url: `${req.headers.origin}/pay?success=true`,
         cancel_url: `${req.headers.origin}/pay?canceled=true`,
       });
       res.redirect(303, session.url);

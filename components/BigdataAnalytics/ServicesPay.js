@@ -36,8 +36,8 @@ export default function ServicesPay() {
       const attendedBy = localStorage.getItem('attendedBy');      
       const password = localStorage.getItem('password');  
 
-      const amount = query.get('amount');
-      const plan = query.get('productName');
+      const amount = '350';
+      const plan = 'standard';
 
       if (storedEmail) {
         setEmail(storedEmail);
