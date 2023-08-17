@@ -57,10 +57,10 @@ export default function ServicesPay() {
         router.push('/sign-up/');
       }else{
        
-        const query = new URLSearchParams(window.location.search);
+        const query = new URLSearchParams(router.asPath.split('?')[1]);
         if (query.get('success')) {
             axios.post(`/api/payment`,data).then(res=>{
-             /*  if(res.data.status ===200){                
+              if(res.data.status ===200){                
                 //send mail for user registered
                 const mailData = {
                   username:username,
@@ -123,7 +123,7 @@ export default function ServicesPay() {
 
               }else if(res.data.status === 400){
                   swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
-              } */
+              } 
             }); 
         
           swal("success",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
