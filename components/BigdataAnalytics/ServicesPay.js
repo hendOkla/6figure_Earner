@@ -59,7 +59,7 @@ export default function ServicesPay() {
        
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
-         /*  axios.post(`/api/payment`,data).then(res=>{
+          axios.post(`/api/payment`,data).then(res=>{
             if(res.data.status ===200){                
               //send mail for user registered
               const mailData = {
@@ -129,7 +129,7 @@ export default function ServicesPay() {
             }else if(res.data.status === 400){
                 swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
             }
-          }); */
+          }); 
         
           swal("success",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
 
