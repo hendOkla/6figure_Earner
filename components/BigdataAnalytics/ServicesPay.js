@@ -51,73 +51,25 @@ export default function ServicesPay() {
       console.log('welcome'+email);
       console.log('welcome storedEmail'+link);
 
-      function continueRegistration(){
-        axios.post(`/api/payment`,data).then(res=>{
-          if(res.data.status ===200){                
-            //send mail for user registered
-            const mailData = {
-              username:username,
-              email:email,
-              link: link,
-              password: password,                  
-            }
+      
 
-            fetch('/api/send-email', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ mailData }),
-            })
-              .then(response => response.json())
-              .then(data => {
-                if (data.status===200) {
-                  axios.post(`/api/updateCustomStatus/${username}`).then(ress=>{
-                    if(ress.status ===200){
-                          //get user who attended by he
-                        axios.get(`/api/getCEmail/${attendedBy}`,data).then(resEmail=>{
-                          if(resEmail.data.email){
-
-                            //send mail for user registered
-                            const reMailData = {
-                              username:attendedBy,
-                              email:resEmail.data.email,
-                              newUser:username                                            
-                            }
-
-                            fetch('/api/receive-email', {
-                              method: 'POST',
-                              headers: {
-                                'Content-Type': 'application/json',
-                              },
-                              body: JSON.stringify({ reMailData }),
-                            })
-                              .then(responseMail => responseMail.json())
-                              .then(data => {
-                                if (data.status===200) {                       
-                                  swal("Success",`Ready to show videos,Please check your mail......`,"success");  
-                                  router.push('/'); 
-                                } else {
-                                  swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
-                                }
-                            }); 
-                          }
-
-                        });
-                    }else{
-                      swal("Error",res.data.error,"error");
-                    }
-                  }); 
-                } else {
-                  swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
-                }
-            });
-
-
-          }else if(res.data.status === 400){
-              swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
-          } 
-        });             axios.post(`/api/payment`,data).then(res=>{
+  
+      
+      if(!username){
+        router.push('/sign-up/');
+      }else{
+       
+        const query = new URLSearchParams(router.asPath.split('?')[1]);
+        if (query.get('success')) {
+          const data = {
+            username: username,
+            attendedBy: attendedBy,
+            amount: amount,
+            paymentPlan: plan,
+            email: email,
+            password: password
+          };
+            axios.post(`/api/payment`,data).then(res=>{
               if(res.data.status ===200){                
                 //send mail for user registered
                 const mailData = {
@@ -183,21 +135,8 @@ export default function ServicesPay() {
                   swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
               } 
             }); 
-
-      }
-
-  
-      
-      if(!username){
-        router.push('/sign-up/');
-      }else{
-       
-        const query = new URLSearchParams(router.asPath.split('?')[1]);
-        if (query.get('success')) {
-
-          continueRegistration();
         
-          swal("success",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
+            swal("success",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
 
         
         
