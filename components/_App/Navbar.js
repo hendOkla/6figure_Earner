@@ -106,7 +106,7 @@ const NavbarStyleFour = () => {
         <div className="startp-nav">
           <div className="container">
             <nav className="navbar navbar-expand-md navbar-light">
-              <Link href="/it-startup" className="navbar-brand img-header">
+              <Link href="/" className="navbar-brand img-header">
                 <img src="/images/logo-white.png" alt="logo"     height= {"75px;"} />
                 
               </Link>
