@@ -44,6 +44,9 @@ const Login = () => {
                         localStorage.setItem('auth_token',res.data.fname); 
                         localStorage.setItem('username',res.data.username);
                         localStorage.setItem('link',res.data.link); 
+                        localStorage.setItem('email_login',loginInput.email); 
+
+                       
 
                         swal("Success",res.data.message,"success"); 
                         if(localStorage.getItem(`course_id`)!==null){
