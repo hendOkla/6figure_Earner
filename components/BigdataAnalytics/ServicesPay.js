@@ -39,7 +39,7 @@ export default function ServicesPay() {
     useEffect(() => {
       const username = localStorage.getItem('username');
       const link = localStorage.getItem('link');
-      const storedEmail = localStorage.getItem('email_login');
+      const storedEmail = localStorage.getItem('email');
       const plan = localStorage.getItem('paymentPlan'); 
       const amount = localStorage.getItem('amount'); 
       const attendedBy = localStorage.getItem('attendedBy');      
