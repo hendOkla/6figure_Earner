@@ -36,6 +36,7 @@ export default function ServicesPay() {
       const storedEmail = localStorage.getItem('email');
       const attendedBy = localStorage.getItem('attendedBy');      
       const password = localStorage.getItem('password');  
+      const sendEmail = localStorage.getItem('email');
 
       const amount = '350';
       const plan = 'standard';
@@ -70,13 +71,13 @@ export default function ServicesPay() {
               attendedBy: attendedBy,
               amount: amount,
               paymentPlan: plan,
-              email: email,
+              email: sendEmail,
               password: password
             };
 
             const mailData = {
               username:username,
-              email:email,
+              email:sendEmail,
               link: link,
               password: password,                  
             }

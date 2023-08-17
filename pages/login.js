@@ -44,7 +44,7 @@ const Login = () => {
                         localStorage.setItem('auth_token',res.data.fname); 
                         localStorage.setItem('username',res.data.username);
                         localStorage.setItem('link',res.data.link); 
-                        localStorage.setItem('email_login',loginInput.email); 
+                        localStorage.setItem('email',loginInput.email); 
 
                        
 
