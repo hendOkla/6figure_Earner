@@ -65,16 +65,19 @@ export default function ServicesPay() {
               email: email,
               password: password
             };
+
+            const mailData = {
+              username:username,
+              email:email,
+              link: link,
+              password: password,                  
+            }
+
+
             axios.post(`/api/payment`,data).then(res=>{
               if(res.data.status ===200){                
                 //send mail for user registered
-                const mailData = {
-                  username:username,
-                  email:email,
-                  link: link,
-                  password: password,                  
-                }
-  
+ 
                 fetch('/api/send-email', {
                   method: 'POST',
                   headers: {
@@ -122,6 +125,8 @@ export default function ServicesPay() {
                         }
                       }); 
                     } else {
+
+                      console.log(mailData);
                       swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
                     }
                 });
