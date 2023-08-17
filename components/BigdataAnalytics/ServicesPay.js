@@ -21,7 +21,6 @@ export default function ServicesPay() {
     const { query } = useRouter();
 
     const [email, setEmail] = useState('');
-    const [amount, setAmount] = useState('');
 
 
     const sessionId = decodeURIComponent(query.session_id);
@@ -38,11 +37,11 @@ export default function ServicesPay() {
       const password = localStorage.getItem('password');  
       const sendEmail = localStorage.getItem('email');
 
+      const amount= '350'; 
       const plan = 'standard';
 
 
       
-      console.log(amount); 
 
 
 
@@ -189,7 +188,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => setAmount('350')} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -207,7 +206,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => setAmount('600')} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
