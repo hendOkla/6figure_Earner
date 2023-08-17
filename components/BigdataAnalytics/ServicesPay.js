@@ -64,7 +64,9 @@ export default function ServicesPay() {
           email: email,
           password: password
         };
-        if(showStatus==='success'){
+
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('success')) {
           axios.post(`/api/payment`,data).then(res=>{
             if(res.data.status ===200){                
               //send mail for user registered
@@ -136,8 +138,11 @@ export default function ServicesPay() {
                 swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
             }
           });
-        }else{
-        }            
+        }
+    
+        if (query.get('canceled')) {
+          swal("Error",`An error occurred, try again please...`,"error"); 
+        }          
       }
     }, [showStatus]);
 
