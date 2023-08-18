@@ -19,7 +19,7 @@ export default async function (req, res) {
     const message = {
         from: '6figure-earner@6figure-earner.net',
         to: reMailData.email,
-        subject: `Your share link has been used by  ${reMailData.newUser}`,
+        subject: `congratulations a new member ${reMailData.newUser} has joined  `,
         html: 
         `<!DOCTYPE html>
         <html>
