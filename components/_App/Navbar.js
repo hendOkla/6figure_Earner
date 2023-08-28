@@ -143,30 +143,34 @@ const NavbarStyleFour = () => {
                       {translations ? (translations.form.home) : ('')}                      
                     </Link>
                   </li>
+                  {isLoggedIn && (
+                    <li className="nav-item">
+                        <Link
+                          href="#"
+                          onClick={(e) => e.preventDefault()}
+                          className="nav-link"
+                        >
+                          {translations ? (translations.form.education) : ('')} <Icon.ChevronDown />
+                        </Link>
+  
+                        <ul className="dropdown-menu">
+                            {
+                              categoryList.map((item)=>{
+                                  return(
+                                    <li className="nav-item" key={item.id}>
+                                      <Link className="nav-item"  href={{ pathname: '/blog-5', query: { id: `${item.id}` ,cat:`${item.name_en}`} }}>
+                                        {translations ? (item[`name_${locale}`]) : ('')}
+                                      </Link>
+                                    </li>
+                                  )
+                              })
+                          }
+                        </ul>
+                    </li>
 
-                  <li className="nav-item">
-                    <Link
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className="nav-link"
-                    >
-                      {translations ? (translations.form.education) : ('')} <Icon.ChevronDown />
-                    </Link>
+                  )}
 
-                    <ul className="dropdown-menu">
-                        {
-                          categoryList.map((item)=>{
-                              return(
-                                <li className="nav-item" key={item.id}>
-                                  <Link className="nav-item"  href={{ pathname: '/blog-5', query: { id: `${item.id}` ,cat:`${item.name_en}`} }}>
-                                    {translations ? (item[`name_${locale}`]) : ('')}
-                                  </Link>
-                                </li>
-                              )
-                          })
-                      }
-                    </ul>
-                  </li>
+
 
 
 

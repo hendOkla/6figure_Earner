@@ -165,26 +165,27 @@ const Blog5 = () => {
                             </div>
                         </div>
                         {/* Book */}
+                        
+                        <PageBanner pageTitle='Books' />
                         <div className="blog-area ptb-80">
-                            <PageBanner pageTitle={translations.form.digitalBook} /> 
                             <div className="container">
                                 <div className="row">
                                     {curseListBook.length ? 
                                         (
-                                            curseListBook.map((item)=>{
+                                            curseListBook.map((itemBook)=>{
                                                 return(
                                                     <>
                                                         <div className="col-lg-4 col-md-6 col-sm-12">
-                                                            <div className="single-services-box-item" onClick={() => handleClickBook(id, item.id)}>
+                                                            <div className="single-services-box-item" onClick={() => handleClickBook(id, itemBook.id)}>
                                                                 <div className="icon">
-                                                                    <img src={`https://6figure-earner.net/LarReApi/public/${item.image}`}  alt="image" />
+                                                                    <img src={`https://6figure-earner.net/LarReApi/public/${itemBook.image}`}  alt="image" />
                                                                 </div>
                                                                 <h3>
                                                                     <Link href="#" className="link-service" >
-                                                                        {item[`name_${locale}`]}
+                                                                        {itemBook[`name_${locale}`]}
                                                                     </Link>
                                                                 </h3>
-                                                                <p>{item[`description_${locale}`]}</p>
+                                                                <p>{itemBook[`description_${locale}`]}</p>
                                                                 
                                                                 <Link href="#"  className="learn-more-btn link-service">
                                                                     <Icon.ArrowRight /> {localStorage.getItem(`auth_token`)?translations.form.buy:translations.form.show}
@@ -231,6 +232,7 @@ const Blog5 = () => {
                                 <img src="/images/shape2.svg" alt="shape" />
                             </div>
                         </div>
+
                     <Footer />                    
                 
                 </>
