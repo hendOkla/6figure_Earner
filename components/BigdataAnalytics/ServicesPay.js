@@ -156,7 +156,7 @@ export default function ServicesPay() {
     }, [showStatus]);
 
 
-    const handleButtonClick = async (productName,description,value) => {
+    const handleButtonClick = async (e,productName,description,value) => {
       e.preventDefault();
       
       localStorage.setItem('amount',value);
