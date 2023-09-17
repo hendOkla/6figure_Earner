@@ -157,6 +157,7 @@ export default function ServicesPay() {
 
 
     const handleButtonClick = async (productName,description,value) => {
+      e.preventDefault();
       
       localStorage.setItem('amount',value);
 
@@ -191,7 +192,7 @@ export default function ServicesPay() {
   return (
     
     <>
-      <form>
+      <div>
         <section>
           <input type="email" name="email" value={email} readOnly hidden />
           <div className="bigdata-services-area ptb-80 bg-eef6fd">
@@ -219,7 +220,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("Standard","Standard service online courses","350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"Standard","Standard service online courses","350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -237,7 +238,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("Pro","Pro service online courses","600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button onClick={(e) => handleButtonClick(e,"Pro","Pro service online courses","600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
@@ -245,7 +246,7 @@ export default function ServicesPay() {
             </div>
           </div>
         </section>
-      </form>  
+      </div>  
     </>
   );
 }
