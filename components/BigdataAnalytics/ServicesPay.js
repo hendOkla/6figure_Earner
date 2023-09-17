@@ -167,7 +167,7 @@ export default function ServicesPay() {
         price:value
       }
 
-      try {
+/*       try {
         const data = await axios.post('/api/init',  {
           method: 'POST',
           headers: {
@@ -180,7 +180,9 @@ export default function ServicesPay() {
       } catch (e) {
         console.error(e)
         setLoading(false)
-      }
+      } */
+
+      console.log('welcom payment');
 
 
 
