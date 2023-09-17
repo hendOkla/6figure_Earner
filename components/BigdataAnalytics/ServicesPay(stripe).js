@@ -21,14 +21,20 @@ export default function ServicesPay() {
 
     const [email, setEmail] = useState('');
 
-    const [loading, setLoading] =  useState(false);
-
 
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
 
-    
-  
+
+    const handleButtonClick = (value) => {
+      
+      localStorage.setItem('amount',value);
+      if(value=="350"){
+        localStorage.setItem('plan',"Standard");
+      }else{
+        localStorage.setItem('plan',"Pro");
+      }
+    };
     
     
 
@@ -155,41 +161,10 @@ export default function ServicesPay() {
       }
     }, [showStatus]);
 
-
-    const handleButtonClick = async (productName,description,value) => {
-      
-      localStorage.setItem('amount',value);
-
-
-      const paymentData ={
-        ProductName: productName,
-        Description:description,
-        price:value
-      }
-
-      try {
-        const data = await axios.post('/api/init',  {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ paymentData }),
-        })
-        setLoading(false)
-        window.open(data.data.hosted_url, '_blank');
-      } catch (e) {
-        console.error(e)
-        setLoading(false)
-      }
-
-
-
-    };
-
   return (
     
     <>
-      <form action="" method="POST">
+      <form action="/api/checkout_sessions" method="POST">
         <section>
           <input type="email" name="email" value={email} readOnly hidden />
           <div className="bigdata-services-area ptb-80 bg-eef6fd">
@@ -217,7 +192,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("Standard","Standard service online courses","350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button onClick={() => handleButtonClick("350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -235,7 +210,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("Pro","Pro service online courses","600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button onClick={() => handleButtonClick("600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>

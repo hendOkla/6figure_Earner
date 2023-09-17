@@ -1563,7 +1563,7 @@
   .startp-nav nav .others-option {
     position: absolute;
     right: 45px;
-    top: 9px;
+    /* top: 9px; */
   }
   .startp-nav nav .others-option .btn.btn-light {
     border: 1px dashed #cdf1d8;
