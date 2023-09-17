@@ -191,7 +191,7 @@ export default function ServicesPay() {
   return (
     
     <>
-      <form action="" method="POST">
+      <form></form>
         <section>
           <input type="email" name="email" value={email} readOnly hidden />
           <div className="bigdata-services-area ptb-80 bg-eef6fd">
