@@ -5,18 +5,18 @@ const { Charge } = resources;
 
 const coinInitRoute = async(req, res) => {
 
-  const { paymentData } = req.body
+  const { id } = req.body
 
   const product = products.find(product => product.id === id)
 
   try {
 
     const chargeData = {
-      name: paymentData.ProductName,
-      description: paymentData.description,
+      name: 'Pro',
+      description: "test",
       pricing_type: "fixed_price",
       local_price: {
-        amount: paymentData.price,
+        amount: 25,
         currency: 'USD',
       },
 

@@ -168,20 +168,7 @@ export default function ServicesPay() {
         price:value
       }
 
-       try {
-        const data = await axios.post('/api/init',  {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ paymentData }),
-        })
-        setLoading(false)
-        window.open(data.data.hosted_url, '_blank');
-      } catch (e) {
-        console.error(e)
-        setLoading(false)
-      } 
+      const data = await axios.post('/api/init', { id: 5 })
 
       console.log('welcom payment');
 
