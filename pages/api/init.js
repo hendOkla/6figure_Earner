@@ -1,5 +1,4 @@
 import { Client, resources } from 'coinbase-commerce-node';
-import { products } from '../../../data';
 
 Client.init(String(process.env.COINBASE_API));
 const { Charge } = resources;
