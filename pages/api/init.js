@@ -1,21 +1,23 @@
 import { Client, resources } from 'coinbase-commerce-node';
+import { products } from '../../data.js';
 
-Client.init(String('d843e21a-5b60-49e5-9f50-4d01da739134'));
+Client.init(String(process.env.COINBASE_API));
 const { Charge } = resources;
 
 const coinInitRoute = async(req, res) => {
 
   const { id } = req.body
 
+  const product = products.find(product => product.id === id)
 
   try {
 
     const chargeData = {
-      name: 'Pro',
-      description: "test",
+      name: product.name,
+      description: product.description,
       pricing_type: "fixed_price",
       local_price: {
-        amount: 25,
+        amount: product.price,
         currency: 'USD',
       },
 
