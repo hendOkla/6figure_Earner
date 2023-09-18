@@ -1,13 +1,12 @@
 import { Client, resources } from 'coinbase-commerce-node';
 
-Client.init(String(process.env.COINBASE_API));
+Client.init(String('d843e21a-5b60-49e5-9f50-4d01da739134'));
 const { Charge } = resources;
 
 const coinInitRoute = async(req, res) => {
 
   const { id } = req.body
 
-  
 
   try {
 
