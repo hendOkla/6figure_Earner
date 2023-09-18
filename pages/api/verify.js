@@ -28,6 +28,12 @@ export default async function coinVerifyRoute(req, res) {
             router.push('https://www.6figure-earner.world/pay?success=true');
             console.log("confirmed")
         }
+        if (event.type === 'charge:underpaid') {
+            // TODO
+            // all good, charge confirmed
+            router.push('https://www.6figure-earner.world/pay?success=true');
+            console.log("confirmed")
+        }
 
         if (event.type === 'charge:failed') {
             // TODO
