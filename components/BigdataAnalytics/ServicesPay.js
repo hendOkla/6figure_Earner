@@ -5,26 +5,13 @@ import swal from 'sweetalert';
 import axios from 'axios';
 
 
-
-
 export default function ServicesPay() {
     const router = useRouter();
-
     const { query } = useRouter();
-
     const [email, setEmail] = useState('');
-
     const [loading, setLoading] =  useState(false);
-
-
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
-
-    
-  
-    
-    
-
 
     useEffect(() => {
       const username = localStorage.getItem('username');
