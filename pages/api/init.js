@@ -24,6 +24,9 @@ const coinInitRoute = async(req, res) => {
         id: product.id,
         userID: 1
       },
+
+      redirect_url: '6figure-earner.world/pay?success=true',
+      cancel_url:'6figure-earner.world/pay?canceled=true',
     };
 
     const charge = await Charge.create(chargeData);
