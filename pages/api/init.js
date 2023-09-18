@@ -7,7 +7,7 @@ const coinInitRoute = async(req, res) => {
 
   const { id } = req.body
 
-  const product = products.find(product => product.id === id)
+  
 
   try {
 

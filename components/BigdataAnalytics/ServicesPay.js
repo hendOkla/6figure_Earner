@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import StripeCheckout from 'react-stripe-checkout';
 import swal from 'sweetalert';
 import axios from 'axios';
 
 
-import { loadStripe } from '@stripe/stripe-js';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
 
 export default function ServicesPay() {
     const router = useRouter();
@@ -168,13 +161,35 @@ export default function ServicesPay() {
         price:value
       }
 
-      const data = await axios.post('/api/init', { id: 5 })
+      
+
+      fetch('/api/init', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id:5 }),
+      })
 
       console.log('welcom payment');
 
 
 
     };
+
+
+    const coinbase = async () => {
+      axios.defaults.baseURL = '';
+      setLoading(true)
+      try {
+        const data = await axios.post('/api/init', { id: 8 })
+        setLoading(false)
+        window.open(data.data.hosted_url, '_blank');
+      } catch (e) {
+        console.error(e)
+        setLoading(false)
+      }
+    }
 
   return (
     
@@ -207,6 +222,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
+                    <button onClick={coinbase} disabled={loading}> Pay With Crtpto </button>
                       <button onClick={(e) => handleButtonClick(e,"Standard","Standard service online courses","350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
