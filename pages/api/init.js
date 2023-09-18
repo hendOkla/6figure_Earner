@@ -18,12 +18,12 @@ const coinInitRoute = async(req, res) => {
       pricing_type: "fixed_price",
       local_price: {
         amount: product.price,
-        currency: 'USD',
+        currency: product.currency,
       },
-
-      redirect_url: '6figure-earner.world/pay?success=true',
-      cancel_url:'6figure-earner.world/pay?canceled=true',
-      
+      metadata: {
+        id: product.id,
+        userID: 1
+      },
     };
 
     const charge = await Charge.create(chargeData);
