@@ -189,7 +189,7 @@ export default function ServicesPay() {
                     </div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>350.00{' '}
+                        <sup>$</sup>25.00{' '}
                       </span>
                     </div>
                     <div className="pricing-features">
