@@ -155,7 +155,9 @@ export default function ServicesPay() {
       try {
         const data = await axios.post('/api/init', { paymentData: paymentData })
         setLoading(false)
-        window.open(data.data.hosted_url, '_blank');
+        /* window.open(data.data.hosted_url, '_blank'); */
+
+        swal("success",`success paid`,"success"); 
       } catch (e) {
         console.error(e)
         setLoading(false)
