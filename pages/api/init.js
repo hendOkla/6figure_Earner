@@ -5,17 +5,17 @@ const { Charge } = resources;
 
 const coinInitRoute = async(req, res) => {
 
-  const { id } = req.body
+  const { paymentData } = req.body
 
 
   try {
 
     const chargeData = {
-      name: 'Pro',
-      description: "test",
+      name: paymentData.ProductName,
+      description: paymentData.Description,
       pricing_type: "fixed_price",
       local_price: {
-        amount: 25,
+        amount: paymentData.price,
         currency: 'USD',
       },
 
