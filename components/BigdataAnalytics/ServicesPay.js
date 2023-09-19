@@ -156,8 +156,7 @@ export default function ServicesPay() {
         const data = await axios.post('/api/init', { paymentData: paymentData })
         setLoading(false)
         /* window.open(data.data.hosted_url, '_blank'); */
-
-        swal("success",`success paid`,"success"); 
+        window.location.href = data.data.hosted_url;
       } catch (e) {
         console.error(e)
         setLoading(false)
