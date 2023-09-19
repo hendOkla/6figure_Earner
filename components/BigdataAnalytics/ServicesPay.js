@@ -190,14 +190,14 @@ export default function ServicesPay() {
                     </div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>25.00{' '}
+                        <sup>$</sup>350.00{' '}
                       </span>
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"Standard","Standard service online courses","25")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"Standard","Standard service online courses","350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
