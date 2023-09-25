@@ -50,8 +50,11 @@ const NavbarStyleFour = () => {
       }
     } 
     fetchCategoryList(); 
-      //for translation 
-      async function fetchTranslations() {
+
+
+
+    //for translation 
+    async function fetchTranslations() {
         const translations = await getDictionary(locale);
         setTranslations(translations);
     }
@@ -143,6 +146,7 @@ const NavbarStyleFour = () => {
                       {translations ? (translations.form.home) : ('')}                      
                     </Link>
                   </li>
+
                   {isLoggedIn && (
                     <li className="nav-item">
                         <Link
@@ -194,6 +198,17 @@ const NavbarStyleFour = () => {
                       }`}
                     >
                       {translations ? (translations.form.contact) : ('')}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      href="/pricing"
+                      onClick={toggleNavbar}
+                      className={`nav-link ${
+                        currentPath == "/" && "active"
+                      }`}
+                    >
+                      {translations ? (translations.form.services) : ('')}                      
                     </Link>
                   </li>
                 </ul>

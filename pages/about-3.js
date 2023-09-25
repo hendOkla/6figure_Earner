@@ -69,7 +69,7 @@ const About3 = () => {
                                 </div>
                             </div> */}
 
-                            <div className="col-lg-6 col-md-6 col-sm-6">
+                            <div className="col-lg-4 col-md-4 col-sm-4">
                                 <div className="about-text">
                                     <h3>{translations ? (translations.form.ourMission) : ('')}</h3>
                                     <p>{translations ? (translations.form.FirstMission) : ('')}</p>
@@ -78,11 +78,18 @@ const About3 = () => {
                                 </div>
                             </div>
 
-                            <div className="col-lg-6 col-md-6 col-sm-6">
+                            <div className="col-lg-4 col-md-4 col-sm-4">
                                 <div className="about-text">
                                 
                                     <h3>{translations ? (translations.form.howWe) : ('')}</h3>
                                     <p>{translations ? (translations.form.forstPlat) : ('')}</p>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4 col-sm-4">
+                                <div className="about-text">
+                                
+                                    <h3>{translations ? (translations.form.whatServer) : ('')}</h3>
+                                    <p>{translations ? (translations.form.service1) : ('')}</p>
                                 </div>
                             </div>
                         </div>

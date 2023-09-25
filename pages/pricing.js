@@ -1,26 +1,35 @@
-import React from 'react';
+import React , { useState , useEffect } from 'react';
+import { useRouter } from "next/router";
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import PageBanner from '@/components/Common/PageBanner';
-import PricingStyleOne from '@/components/PricingPlans/PricingStyleOne';
-import PricingStyleTwo from '@/components/PricingPlans/PricingStyleTwo';
-import PricingStyleFour from '@/components/PricingPlans/PricingStyleFour'; 
+import PricingStyleFour from '@/components/PricingPlans/PricingStyleFour';
+import { getDictionary } from "getDictionary"; 
  
 const Pricing = () => {
+    const router = useRouter();
+    const { locale } = router;
+    const [translations, setTranslations] = useState(null);
+
+    useEffect(() => {
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();        
+        
+    }, []);
+
+    
     return (
         <>
             <Navbar />
 
-            <PageBanner pageTitle="Pricing" />
-
-            <PricingStyleOne />
-
-            <PricingStyleTwo />
-
+            <PageBanner pageTitle={translations ? (translations.form.services) : ('')} />
             <div className="pt-80">
                 <PricingStyleFour />
             </div> 
-
             <Footer />
         </>
     )
