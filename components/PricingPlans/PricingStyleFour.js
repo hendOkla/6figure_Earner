@@ -1,10 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState , useEffect } from 'react';
+import { useRouter } from "next/router";
 import Link from 'next/link';
 import * as Icon from 'react-feather';
+import { getDictionary } from "getDictionary";
 
-class PricingStyleFour extends Component {
 
-    openTabSection = (evt, tabNmae) => {
+const PricingStyleFour = () => {
+    const router = useRouter();
+    const { locale } = router;
+    const [translations, setTranslations] = useState(null);
+    
+
+    useEffect(() => {
+        //for translation 
+        async function fetchTranslations() {
+            const translations = await getDictionary(locale);
+            setTranslations(translations);
+        }
+        fetchTranslations();        
+        
+    }, []);
+
+    const openTabSection = (evt, tabNmae) => {
         let i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabs_item");
         for (i = 0; i < tabcontent.length; i++) {
@@ -20,240 +37,109 @@ class PricingStyleFour extends Component {
         evt.currentTarget.className += "current";
     }
 
-    render() {
-        return (
-            <>
-                <div className="pricing-area pb-50">
-                    <div className="container">
-                        <div className="section-title">
-                            <h2>Our Pricing Plan</h2>
-                            <div className="bar"></div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                        
-                        <div className="tab pricing-tab bg-color">
-                            <ul className="tabs">
-                                <li
-                                    className="current"
-                                    onClick={(e) => this.openTabSection(e, 'tab1')}
-                                >
-                                    Monthly Plan
-                                </li>
-                                
-                                <li onClick={(e) => this.openTabSection(e, 'tab2')}>
-                                    Yearly Plan
-                                </li>
-                            </ul>
+    return (
+        <>
+            <div className="pricing-area pb-50">
+                
+                <div className="container"> 
+                    <h5 className='mb-4'> 
+                        {translations ? (translations.form.pricing1) : ('')}
+                    </h5>
+                   
+                    <div className="section-title">
+                        <br></br><br></br>
+                        <h2>{translations ? (translations.form.pricingPlan) : ('')}</h2>
+                        <div className="bar"></div>
+                    </div>
 
-                            <div className="tab_content">
-                                <div id="tab1" className="tabs_item">
-                                    <div className="row justify-content-center">
-                                        <div className="col-lg-4 col-md-6 col-sm-6">
-                                            <div className="pricing-box">
-                                                <div className="pricing-header">
-                                                    <h3>Free</h3>
-                                                    <p>Get your business up <br /> and running</p>
-                                                </div>
-
-                                                <div className="price">
-                                                    $0 <span>/m</span>
-                                                </div>
-
-                                                <div className="buy-btn">
-                                                    <Link href="#" className="btn btn-primary">
-                                                        Get Started Free
-                                                    </Link>
-                                                </div>
-
-                                                <ul className="pricing-features">
-                                                    <li><Icon.Check /> Drag & Drop Builder</li>
-                                                    <li><Icon.Check /> Lead Generation & Sales</li>
-                                                    <li><Icon.Check /> Boot & Digital Assistants</li>
-                                                    <li><Icon.Check /> Customer Service</li>
-                                                    <li><Icon.Check /> Up to 1000 Subscribers</li>
-                                                    <li><Icon.Check /> Unlimited Broadcasts</li>
-                                                    <li><Icon.Check /> Landing Pages & Web Widgets</li>
-                                                </ul>
+                    <div className="tab pricing-tab bg-color">
+                        <div className="tab_content">
+                            <div id="tab1" className="tabs_item">
+                                <div className="row justify-content-center">
+                                    <div className="col-lg-4 col-md-6 col-sm-6">
+                                        <div className="pricing-box">
+                                            <div className="pricing-header">
+                                                <h3>6FE Standard</h3>
+                                                <p><br></br></p>
+                                                <img src="/images/standard.webp" alt="logo" height="250px;"></img>
                                             </div>
-                                        </div>
 
-                                        <div className="col-lg-4 col-md-6 col-sm-6">
-                                            <div className="pricing-box">
-                                                <div className="pricing-header">
-                                                    <h3>Pro</h3>
-                                                    <p>Get your business up <br /> and running</p>
-                                                </div>
-
-                                                <div className="price">
-                                                    $149 <span>/m</span>
-                                                </div>
-
-                                                <div className="buy-btn">
-                                                    <Link href="#" className="btn btn-primary">
-                                                        Start 3 Days Free Trial
-                                                    </Link>
-                                                </div>
-
-                                                <ul className="pricing-features">
-                                                    <li><Icon.Check /> Drag & Drop Builder</li>
-                                                    <li><Icon.Check /> Lead Generation & Sales</li>
-                                                    <li><Icon.Check /> Boot & Digital Assistants</li>
-                                                    <li><Icon.Check /> Customer Service</li>
-                                                    <li><Icon.Check /> Up to 3300 Subscribers</li>
-                                                    <li><Icon.Check /> Unlimited Broadcasts</li>
-                                                    <li><Icon.Check /> Landing Pages & Web Widgets</li>
-                                                </ul>
+                                            <div className="price">
+                                                $350 <span></span>
                                             </div>
-                                        </div>
 
-                                        <div className="col-lg-4 col-md-6 col-sm-6">
-                                            <div className="pricing-box">
-                                                <div className="pricing-header">
-                                                    <h3>Premium</h3>
-                                                    <p>Get your business up <br /> and running</p>
-                                                </div>
-
-                                                <div className="price">
-                                                    $179 <span>/m</span>
-                                                </div>
-
-                                                <div className="buy-btn">
-                                                    <Link href="#" className="btn btn-primary">
-                                                        Start 6 Days Free Trial
-                                                    </Link>
-                                                </div>
-
-                                                <ul className="pricing-features">
-                                                    <li><Icon.Check /> Drag & Drop Builder</li>
-                                                    <li><Icon.Check /> Lead Generation & Sales</li>
-                                                    <li><Icon.Check /> Boot & Digital Assistants</li>
-                                                    <li><Icon.Check /> Customer Service</li>
-                                                    <li><Icon.Check /> Up to 10000 Subscribers</li>
-                                                    <li><Icon.Check /> Unlimited Broadcasts</li>
-                                                    <li><Icon.Check /> Landing Pages & Web Widgets</li>
-                                                </ul>
+                                            <div className="buy-btn">
+                                                <Link href="checkout?type=standard" className="btn btn-primary">                                                     
+                                                    {translations ? (translations.form.Checkout) : ('')}
+                                                </Link>
                                             </div>
+
+                                            <ul className="pricing-features">
+                                                <li><Icon.Check /> 6FE Academy</li>
+                                                <li><Icon.Check /> 6FE Ebook</li>
+                                                <li><Icon.X  style={{ color: 'red' }} /> 6FE Streaming</li>
+                                                <li><Icon.X  style={{ color: 'red' }} /> 6FE Consultations</li>
+                                                <li><Icon.X  style={{ color: 'red' }} /> 6FE Private call</li>
+
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div id="tab2" className="tabs_item">
-                                    <div className="row justify-content-center">
-                                        <div className="col-lg-4 col-md-6 col-sm-6">
-                                            <div className="pricing-box">
-                                                <div className="pricing-header">
-                                                    <h3>Free</h3>
-                                                    <p>Get your business up <br /> and running</p>
-                                                </div>
-
-                                                <div className="price">
-                                                    $0 <span>/y</span>
-                                                </div>
-
-                                                <div className="buy-btn">
-                                                    <Link href="#" className="btn btn-primary">
-                                                        Get Started Free
-                                                    </Link>
-                                                </div>
-
-                                                <ul className="pricing-features">
-                                                    <li><Icon.Check /> Drag & Drop Builder</li>
-                                                    <li><Icon.Check /> Lead Generation & Sales</li>
-                                                    <li><Icon.Check /> Boot & Digital Assistants</li>
-                                                    <li><Icon.Check /> Customer Service</li>
-                                                    <li><Icon.Check /> Up to 1000 Subscribers</li>
-                                                    <li><Icon.Check /> Unlimited Broadcasts</li>
-                                                    <li><Icon.Check /> Landing Pages & Web Widgets</li>
-                                                </ul>
+                                    <div className="col-lg-4 col-md-6 col-sm-6">
+                                        <div className="pricing-box">
+                                            <div className="pricing-header">
+                                                <h3>6FE Pro</h3>
+                                                <p><br></br></p>
+                                                <img src="/images/Pro.webp" alt="logo" height="250px;"></img>
                                             </div>
-                                        </div>
 
-                                        <div className="col-lg-4 col-md-6 col-sm-6">
-                                            <div className="pricing-box">
-                                                <div className="pricing-header">
-                                                    <h3>Pro</h3>
-                                                    <p>Get your business up <br /> and running</p>
-                                                </div>
-
-                                                <div className="price">
-                                                    $249 <span>/y</span>
-                                                </div>
-
-                                                <div className="buy-btn">
-                                                    <Link href="#" className="btn btn-primary">
-                                                        Start 3 Days Free Trial
-                                                    </Link>
-                                                </div>
-
-                                                <ul className="pricing-features">
-                                                    <li><Icon.Check /> Drag & Drop Builder</li>
-                                                    <li><Icon.Check /> Lead Generation & Sales</li>
-                                                    <li><Icon.Check /> Boot & Digital Assistants</li>
-                                                    <li><Icon.Check /> Customer Service</li>
-                                                    <li><Icon.Check /> Up to 3300 Subscribers</li>
-                                                    <li><Icon.Check /> Unlimited Broadcasts</li>
-                                                    <li><Icon.Check /> Landing Pages & Web Widgets</li>
-                                                </ul>
+                                            <div className="price">
+                                                $600 <span>/m</span>
                                             </div>
-                                        </div>
 
-                                        <div className="col-lg-4 col-md-6 col-sm-6">
-                                            <div className="pricing-box">
-                                                <div className="pricing-header">
-                                                    <h3>Premium</h3>
-                                                    <p>Get your business up <br /> and running</p>
-                                                </div>
-
-                                                <div className="price">
-                                                    $279 <span>/y</span>
-                                                </div>
-
-                                                <div className="buy-btn">
-                                                    <Link href="#" className="btn btn-primary">
-                                                        Start 6 Days Free Trial
-                                                    </Link>
-                                                </div>
-
-                                                <ul className="pricing-features">
-                                                    <li><Icon.Check /> Drag & Drop Builder</li>
-                                                    <li><Icon.Check /> Lead Generation & Sales</li>
-                                                    <li><Icon.Check /> Boot & Digital Assistants</li>
-                                                    <li><Icon.Check /> Customer Service</li>
-                                                    <li><Icon.Check /> Up to 10000 Subscribers</li>
-                                                    <li><Icon.Check /> Unlimited Broadcasts</li>
-                                                    <li><Icon.Check /> Landing Pages & Web Widgets</li>
-                                                </ul>
+                                            <div className="buy-btn">
+                                                <Link href="checkout?type=Pro" className="btn btn-primary">
+                                                {translations ? (translations.form.Checkout) : ('')}
+                                                </Link>
                                             </div>
+
+                                            <ul className="pricing-features">
+                                                <li><Icon.Check /> 6FE Academy</li>
+                                                <li><Icon.Check /> 6FE Ebook</li>
+                                                <li><Icon.Check /> 6FE Streaming</li>
+                                                <li><Icon.Check /> 6FE Consultations</li>
+                                                <li><Icon.Check /> 6FE Private call</li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    {/* Shape Images */}
-                    <div className="shape1">
-                        <img src="/images/shape1.png" alt="shape" />
-                    </div>
-                    <div className="shape2 rotateme">
-                        <img src="/images/shape2.svg" alt="shape" />
-                    </div>
-                    <div className="shape3">
-                        <img src="/images/shape3.svg" alt="shape" />
-                    </div>
-                    <div className="shape4">
-                        <img src="/images/shape4.svg" alt="shape" />
-                    </div>
-                    <div className="shape7">
-                        <img src="/images/shape4.svg" alt="shape" />
-                    </div>
-                    <div className="shape8 rotateme">
-                        <img src="/images/shape2.svg" alt="shape" />
-                    </div>
                 </div>
-            </>
-        );
-    }
+
+                {/* Shape Images */}
+                <div className="shape1">
+                    <img src="/images/shape1.png" alt="shape" />
+                </div>
+                <div className="shape2 rotateme">
+                    <img src="/images/shape2.svg" alt="shape" />
+                </div>
+                <div className="shape3">
+                    <img src="/images/shape3.svg" alt="shape" />
+                </div>
+                <div className="shape4">
+                    <img src="/images/shape4.svg" alt="shape" />
+                </div>
+                <div className="shape7">
+                    <img src="/images/shape4.svg" alt="shape" />
+                </div>
+                <div className="shape8 rotateme">
+                    <img src="/images/shape2.svg" alt="shape" />
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default PricingStyleFour;
