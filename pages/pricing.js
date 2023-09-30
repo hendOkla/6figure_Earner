@@ -26,7 +26,7 @@ const Pricing = () => {
         <>
             <Navbar />
 
-            <PageBanner pageTitle={translations ? (translations.form.services) : ('')} />
+            <PageBanner pageTitle="pricing"/>
             <div className="pt-80">
                 <PricingStyleFour />
             </div> 
