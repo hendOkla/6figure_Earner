@@ -4,29 +4,16 @@ import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import PageBanner from '@/components/Common/PageBanner';
 import PricingStyleFour from '@/components/PricingPlans/PricingStyleFour';
-import { getDictionary } from "getDictionary"; 
  
 const Pricing = () => {
-    const router = useRouter();
-    const { locale } = router;
-    const [translations, setTranslations] = useState(null);
-
-    useEffect(() => {
-        //for translation 
-        async function fetchTranslations() {
-            const translations = await getDictionary(locale);
-            setTranslations(translations);
-        }
-        fetchTranslations();        
-        
-    }, []);
 
     
     return (
         <>
             <Navbar />
 
-            <PageBanner pageTitle={translations ? (translations.form.services) : ('')} />
+            <PageBanner pageTitle="Our service" />
+            <PageBanner pageTitle="pricing"/>
             <div className="pt-80">
                 <PricingStyleFour />
             </div> 

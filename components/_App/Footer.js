@@ -58,17 +58,29 @@ const Footer = () => {
                   </li> */}
                   <li>
                     <Icon.Mail />
+<<<<<<< HEAD
                     {translations ? (translations.form.mail) : ('')}:{" "}
+=======
+                    {translations ? (translations.form.email) : ('')}:{" "}<br></br>
+>>>>>>> 29cb850d9a4035e9683be120acc25826870f8122
                     <a href="mailto:6figure-earner@6figure-earner.net">6figure-earner@6figure-earner.net</a>
                   </li>
                   <li>
                     <Icon.MapPin />
+<<<<<<< HEAD
                     {translations ? (translations.form.address) : ('')}:{" "}addres
+=======
+                    {translations ? (translations.form.address) : ('')}:{" "}<br></br>
+>>>>>>> 29cb850d9a4035e9683be120acc25826870f8122
                     <a href="mailto:6figure-earner@6figure-earner.net">{translations ? (translations.form.addres) : ('')}:{" "}</a>
                   </li>
                   <li>
                     <Icon.Phone />
+<<<<<<< HEAD
                     {translations ? (translations.form.phone) : ('')}:{" "}
+=======
+                    {translations ? (translations.form.phone) : ('')}:{" "}<br></br>
+>>>>>>> 29cb850d9a4035e9683be120acc25826870f8122
                     <a href="mailto:6figure-earner@6figure-earner.net">+971545565988</a>
                   </li>
                   {/* <li>
