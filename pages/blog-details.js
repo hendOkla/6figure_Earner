@@ -70,7 +70,7 @@ const BlogDetails = () => {
                                 <div className="col-lg-8 col-md-12">
                                     <div className="blog-details-desc">
                                         <div className="article-image">
-                                            <img src={`https://6figure-earner.net/LarReApi/public/${courseInput.image}`} alt="image" />
+                                            <img src={`https://6figure-earner.com/LarReApi/public/${courseInput.image}`} alt="image" />
                                         </div>
                                         <div className="article-content">
                                             <div className="entry-meta">

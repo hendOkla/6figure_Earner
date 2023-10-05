@@ -5,7 +5,7 @@ const path = require('path')
 const nexCondig = {
     reactStrictMode:true,
     env:{
-        BACKEND_URL:'https://6figure-earner.net/LarReApi/public'
+        BACKEND_URL:'https://6figure-earner.com/LarReApi/public'
     }
 }
 
