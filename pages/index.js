@@ -31,7 +31,7 @@ const BigdataAnalytics = () => {
     return (
         <>
             <Navbar />
-            <PageBanner pageTitle={translations ? (translations.form.home) : ('')} />
+            <PageBanner pageTitle="" />
 
             <MainBanner />
 

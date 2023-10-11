@@ -70,7 +70,13 @@
         "pricing1" :"6Figure Earner is an educational website that was created to educate participants on different sources of income through which they can increase their income. It provides many educational services that include recorded online lessons in addition to online lessons that are scheduled through one of the committed sessions such as (Zoom or Google Meet) in addition to the private consultation service. We have a specialized team to provide consultations to subscribers within the two subscription packages that were offered, as each package includes specific services.",
         "pricingPlan" : "Our Pricing Plan",
         "Checkout" : "Checkout",
-        "addres":"Dubai, United Arab Emirates"
+        "addres":"Dubai, United Arab Emirates",
+        "termCondition":"Terms and Conditions",
+        "PryPoly":"Privacy Policy",
+        "delePoly" :"Delivery Policy",
+        "refundPoly":"Refund Policy",
+        "cancelPoly": "Cancelation Policy",
+        "shpPoly": "Shopping Policy"
 
 
 
