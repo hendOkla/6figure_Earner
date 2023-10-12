@@ -41,5 +41,4 @@ const PageBanner = ({pageTitle}) => {
         </>
     );
 }
-
 export default PageBanner;
