@@ -7,6 +7,10 @@ import { useRouter } from 'next/router';
 import { getDictionary } from "getDictionary";
 import axios from "axios";
 
+
+
+
+ 
 const BlogDetails = () => {
     const videoKey = Date.now();
     const router = useRouter();
@@ -71,4 +75,7 @@ const BlogDetails = () => {
         </>
     )
 }
+
+
+
 export default BlogDetails;
