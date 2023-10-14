@@ -28,8 +28,7 @@ const { email , amount } = req.body;
         line_items: [
           {
             price_data: {
-              currency: 'USD',
-              automatic_payment_methods:{enabled: true},
+              currency: 'USD',             
               product_data: {
                 name: productName,
               },
