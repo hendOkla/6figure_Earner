@@ -37,7 +37,7 @@ const { email , amount } = req.body;
             quantity: 1,
           },
         ],
-        payment_method_types:['card','acss_debit'],
+        payment_method_types:['card'],
         mode: 'payment',
         allow_promotion_codes: true,
         success_url: `${req.headers.origin}/pay?success=true`,
