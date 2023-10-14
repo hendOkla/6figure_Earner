@@ -27,7 +27,7 @@ const { email , amount } = req.body;
         line_items: [
           {
             price_data: {
-              currency: 'usd',
+              currency: 'USD',
               product_data: {
                 name: productName,
               },
