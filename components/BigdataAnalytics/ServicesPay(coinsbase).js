@@ -1,43 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import StripeCheckout from 'react-stripe-checkout';
 import swal from 'sweetalert';
 import axios from 'axios';
 
 
-import { loadStripe } from '@stripe/stripe-js';
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
-
 export default function ServicesPay() {
     const router = useRouter();
-
     const { query } = useRouter();
-
     const [email, setEmail] = useState('');
-
-
+    const [loading, setLoading] =  useState(false);
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
-
-
-    const handleButtonClick = (value) => {
-      
-      localStorage.setItem('amount',value);
-      if(value=="350"){
-        localStorage.setItem('plan',"Standard");
-      }else{
-        localStorage.setItem('plan',"Pro");
-      }
-    };
-    
-    
-
 
     useEffect(() => {
       const username = localStorage.getItem('username');
@@ -161,10 +135,41 @@ export default function ServicesPay() {
       }
     }, [showStatus]);
 
+
+    const handleButtonClick = async (e,productName,description,value) => {
+      e.preventDefault();
+      
+      localStorage.setItem('amount',value);
+
+      axios.defaults.baseURL = 'https://www.6figure-earner.world/';
+
+
+      const paymentData ={
+        ProductName: productName,
+        Description:description,
+        price:value
+      }
+
+      
+      setLoading(true)
+      try {
+        const data = await axios.post('/api/init', { paymentData: paymentData })
+        setLoading(false)
+        /* window.open(data.data.hosted_url, '_blank'); */
+        window.location.href = data.data.hosted_url;
+      } catch (e) {
+        console.error(e)
+        setLoading(false)
+      }
+
+
+
+    };
+
   return (
     
     <>
-      <form action="/api/checkout_sessions" method="POST">
+      <div>
         <section>
           <input type="email" name="email" value={email} readOnly hidden />
           <div className="bigdata-services-area ptb-80 bg-eef6fd">
@@ -192,7 +197,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"Standard","Standard service online courses","350")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -210,7 +215,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button onClick={(e) => handleButtonClick(e,"Pro","Pro service online courses","600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
@@ -218,7 +223,7 @@ export default function ServicesPay() {
             </div>
           </div>
         </section>
-      </form>  
+      </div>  
     </>
   );
 }

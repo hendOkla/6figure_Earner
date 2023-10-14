@@ -1,5 +1,5 @@
 import React from "react";
-import ServicesPay from '@/components/BigdataAnalytics/ServicesPay';
+import ServicesPay from '@/components/BigdataAnalytics/ServicesPay(coinsbase)';
 import Navbar from "@/components/_App/Navbar";
 import Footer from "@/components/_App/Footer";
 import { useRouter } from 'next/router';
