@@ -24,10 +24,12 @@ const { email , amount } = req.body;
         billing_address_collection: 'auto',
         shipping_address_collection: {
         },
+        
         line_items: [
           {
             price_data: {
               currency: 'USD',
+              automatic_payment_methods:{"enabled": true},
               product_data: {
                 name: productName,
               },
