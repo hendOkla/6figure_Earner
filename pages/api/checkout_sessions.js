@@ -19,7 +19,7 @@ const { email , amount } = req.body;
 
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
-        customer_email: email,
+        customer_email: 'eng.hendokla@gmail.com',
         submit_type: 'pay',
         billing_address_collection: 'auto',
         shipping_address_collection: {
