@@ -32,7 +32,7 @@ const { email , amount } = req.body;
               product_data: {
                 name: productName,
               },
-              unit_amount_decimal: parseInt(amount*100),
+              unit_amount_decimal: parseInt(amount*10),
             },
             quantity: 1,
           },
