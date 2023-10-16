@@ -29,7 +29,7 @@ export default function ServicesPay() {
     const handleButtonClick = (value) => {
       
       localStorage.setItem('amount',value);
-      if(value=="350"){
+      if(value=="300"){
         localStorage.setItem('plan',"Standard");
       }else{
         localStorage.setItem('plan',"Pro");
@@ -192,7 +192,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={() => handleButtonClick("30")} className="btn btn-primary" type="submit" name="amount" value="350" role="link" >Standard </button>
+                      <button onClick={() => handleButtonClick("30")} className="btn btn-primary" type="submit" name="amount" value="300" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
