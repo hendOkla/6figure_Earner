@@ -29,7 +29,7 @@ export default function ServicesPay() {
     const handleButtonClick = (value) => {
       
       localStorage.setItem('amount',value);
-      if(value=="300"){
+      if(value=="30"){
         localStorage.setItem('plan',"Standard");
       }else{
         localStorage.setItem('plan',"Pro");
