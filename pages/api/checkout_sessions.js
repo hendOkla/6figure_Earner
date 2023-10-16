@@ -10,7 +10,7 @@ const { email , amount } = req.body;
       try {
          const { email, amount } = req.body;
           let productName;
-          if (amount === 350) {
+          if (amount === 30) {
             productName = 'standard';
           } else {
             productName = 'pro';
