@@ -10,7 +10,7 @@ const { email , amount } = req.body;
       try {
          const { email, amount } = req.body;
           let productName;
-          if (amount === 30) {
+          if (amount === 300) {
             productName = 'standard';
           } else {
             productName = 'pro';
@@ -32,7 +32,7 @@ const { email , amount } = req.body;
               product_data: {
                 name: productName,
               },
-              unit_amount_decimal: parseInt(amount*10),
+              unit_amount_decimal: parseInt(amount*100),
             },
             quantity: 1,
           },
