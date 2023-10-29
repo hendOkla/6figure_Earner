@@ -11,6 +11,7 @@ const payment = () => {
   const [isHuman, setIsHuman] = useState(false);
   
   const handleRecaptchaChange = (value) => {
+    console.log(value);
     setIsHuman(!!value);
   };
 
