@@ -19,6 +19,7 @@ const payment = () => {
     
     if (isHuman) {
       // Perform form submission logic
+      console.log('welcomecaptcha');
     } else {
       alert('Please verify that you are a human');
     }
