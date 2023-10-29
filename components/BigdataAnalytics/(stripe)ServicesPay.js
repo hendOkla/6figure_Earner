@@ -6,6 +6,13 @@ import swal from 'sweetalert';
 import axios from 'axios';
 
 
+import { loadStripe } from '@stripe/stripe-js';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 export default function ServicesPay() {
     const router = useRouter();
@@ -19,37 +26,14 @@ export default function ServicesPay() {
     const showStatus = decodeURIComponent(query.status);
 
 
-    const handleButtonClick = async (e, value) => {
-      e.preventDefault();
-
+    const handleButtonClick = (value) => {
+      
       localStorage.setItem('amount',value);
-      if(value=="300"){
+      if(value=="30"){
         localStorage.setItem('plan',"Standard");
       }else{
         localStorage.setItem('plan',"Pro");
       }
-
-      const data = {
-        CustomerName:localStorage.getItem('username'),
-        InvoiceValue:value,
-        DisplayCurrencyIso: 'USD',
-        CustomerEmail: localStorage.getItem('email')
-      }
-
-      axios.get(`/api/create`, { params: data }).then(res=>{
-
-        console.log(res.data.Data.invoiceURL); 
-        const invoiceURL = res.data.Data.invoiceURL;
-        
-        window.location.href = res.data.Data.invoiceURL;
-      });
-
-
-
-
-
-
-
     };
     
     
@@ -65,6 +49,12 @@ export default function ServicesPay() {
 
       const amount= localStorage.getItem('amount');
       const plan = localStorage.getItem('plan');
+
+
+ 
+
+
+
 
       if (storedEmail) {
         setEmail(storedEmail);
@@ -93,10 +83,13 @@ export default function ServicesPay() {
               link: link,
               password: password,                  
             }
+
+
             axios.post(`/api/payment`,data).then(res=>{
               if(res.data.status ===200){                
                 //send mail for user registered
-                 fetch('/api/send-email', {
+ 
+                fetch('/api/send-email', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +140,9 @@ export default function ServicesPay() {
                       console.log(mailData);
                       swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
                     }
-                }); 
+                });
+  
+  
               }else if(res.data.status === 400){
                   swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
               } 
@@ -155,8 +150,10 @@ export default function ServicesPay() {
             
           } catch (error) {
             swal("Error",`Something went wrong, please contact our support team`,"error"); 
-          }          
-        }    
+          }
+          
+        }
+    
         if (query.get('canceled')) {
           swal("Error",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
         }
@@ -167,7 +164,7 @@ export default function ServicesPay() {
   return (
     
     <>
-      <form>
+      <form action="/api/checkout_sessions" method="POST">
         <section>
           <input type="email" name="email" value={email} readOnly hidden />
           <div className="bigdata-services-area ptb-80 bg-eef6fd">
@@ -188,14 +185,14 @@ export default function ServicesPay() {
                     </div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>300.00{' '}
+                        <sup>$</sup>30.00{' '}
                       </span>
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"300")} className="btn btn-primary" type="submit" name="amount" value="300" role="link" >Standard </button>
+                      <button onClick={() => handleButtonClick("30")} className="btn btn-primary" type="submit" name="amount" value="30" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -213,7 +210,7 @@ export default function ServicesPay() {
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button onClick={() => handleButtonClick("600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
