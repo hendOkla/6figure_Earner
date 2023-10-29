@@ -9,6 +9,9 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 
 
+
+
+
 export default function ServicesPay() {
     const router = useRouter();
 
@@ -34,7 +37,7 @@ export default function ServicesPay() {
       if (isHuman) {
 
         localStorage.setItem('amount',value);
-        if(value=="300"){
+        if(value=="30"){
           localStorage.setItem('plan',"Standard");
         }else{
           localStorage.setItem('plan',"Pro");
@@ -188,10 +191,7 @@ export default function ServicesPay() {
                   You can choose the package that suits you and enjoy the experience
                   with us
                 </p>
-                <ReCAPTCHA
-                  sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
-                  onChange={handleRecaptchaChange}
-                />
+
               </div>
               <div className="row justify-content-center">
                 <div className="col-lg-4 col-md-6">
@@ -201,14 +201,14 @@ export default function ServicesPay() {
                     </div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>300.00{' '}
+                        <sup>$</sup>30.00{' '}
                       </span>
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"300")} className="btn btn-primary" type="submit" name="amount" value="300" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"30")} className="btn btn-primary" type="submit" name="amount" value="30" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -231,6 +231,12 @@ export default function ServicesPay() {
                   </div>
                 </div>
               </div>
+              <div class="center-container ">
+                <ReCAPTCHA
+                  sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
+                  onChange={handleRecaptchaChange}
+                />
+               </div>
             </div>
           </div>
         </section>

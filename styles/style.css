@@ -8642,3 +8642,9 @@ Go Top CSS
 
 
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
