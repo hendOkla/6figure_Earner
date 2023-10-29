@@ -27,13 +27,13 @@ const payment = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       {/* Your form fields here */}
       <ReCAPTCHA
         sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
         onChange={handleRecaptchaChange}
       />
-      <button type="submit">Submit</button>
+      <button onClick={(e) => handleSubmit(e,"300")} type="submit">Submit</button>
     </form>
   );
 }

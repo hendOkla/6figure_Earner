@@ -5,6 +5,8 @@ import StripeCheckout from 'react-stripe-checkout';
 import swal from 'sweetalert';
 import axios from 'axios';
 
+import ReCAPTCHA from 'react-google-recaptcha';
+
 
 
 export default function ServicesPay() {
@@ -18,37 +20,44 @@ export default function ServicesPay() {
     const sessionId = decodeURIComponent(query.session_id);
     const showStatus = decodeURIComponent(query.status);
 
+    const [isHuman, setIsHuman] = useState(false);
+  
+    const handleRecaptchaChange = (value) => {
+      console.log(value);
+      setIsHuman(!!value);
+    };
+
 
     const handleButtonClick = async (e, value) => {
       e.preventDefault();
 
-      localStorage.setItem('amount',value);
-      if(value=="300"){
-        localStorage.setItem('plan',"Standard");
-      }else{
-        localStorage.setItem('plan',"Pro");
+      if (isHuman) {
+
+        localStorage.setItem('amount',value);
+        if(value=="300"){
+          localStorage.setItem('plan',"Standard");
+        }else{
+          localStorage.setItem('plan',"Pro");
+        }
+  
+        const data = {
+          CustomerName:localStorage.getItem('username'),
+          InvoiceValue:value,
+          DisplayCurrencyIso: 'USD',
+          CustomerEmail: localStorage.getItem('email')
+        }
+  
+        axios.get(`/api/create`, { params: data }).then(res=>{
+  
+          console.log(res.data.Data.invoiceURL); 
+          const invoiceURL = res.data.Data.invoiceURL;
+          
+          window.location.href = res.data.Data.invoiceURL;
+        });
+
+      } else {
+        alert('Please verify that you are a human');
       }
-
-      const data = {
-        CustomerName:localStorage.getItem('username'),
-        InvoiceValue:value,
-        DisplayCurrencyIso: 'USD',
-        CustomerEmail: localStorage.getItem('email')
-      }
-
-      axios.get(`/api/create`, { params: data }).then(res=>{
-
-        console.log(res.data.Data.invoiceURL); 
-        const invoiceURL = res.data.Data.invoiceURL;
-        
-        window.location.href = res.data.Data.invoiceURL;
-      });
-
-
-
-
-
-
 
     };
     
@@ -179,6 +188,10 @@ export default function ServicesPay() {
                   You can choose the package that suits you and enjoy the experience
                   with us
                 </p>
+                <ReCAPTCHA
+                  sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
+                  onChange={handleRecaptchaChange}
+                />
               </div>
               <div className="row justify-content-center">
                 <div className="col-lg-4 col-md-6">
