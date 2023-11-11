@@ -26,7 +26,6 @@ export default function ServicesPay() {
     const [isHuman, setIsHuman] = useState(false);
   
     const handleRecaptchaChange = (value) => {
-      console.log(value);
       setIsHuman(!!value);
     };
 
@@ -52,7 +51,6 @@ export default function ServicesPay() {
   
         axios.get(`/api/create`, { params: data }).then(res=>{
   
-          console.log(res.data.Data.invoiceURL); 
           const invoiceURL = res.data.Data.invoiceURL;
           
           window.location.href = res.data.Data.invoiceURL;
@@ -88,7 +86,6 @@ export default function ServicesPay() {
        
         const query = new URLSearchParams(router.asPath.split('?')[1]);
         if (query.get('type')==='success') {
-
           try {
             const data = {
               username: username,
@@ -106,9 +103,9 @@ export default function ServicesPay() {
               password: password,                  
             }
             axios.post(`/api/payment`,data).then(res=>{
-              if(res.data.status ===200){                
+              if(res.data.status==200){                
                 //send mail for user registered
-                 fetch('/api/send-email', {
+                  fetch('/api/send-email', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
@@ -140,7 +137,7 @@ export default function ServicesPay() {
                                 })
                                   .then(responseMail => responseMail.json())
                                   .then(data => {
-                                    if (data.status===200) {                       
+                                    if (data.status===200) {  
                                       swal("Success",`Ready to show videos,Please check your mail......`,"success");  
                                       router.push('/'); 
                                     } else {
@@ -155,12 +152,10 @@ export default function ServicesPay() {
                         }
                       }); 
                     } else {
-
-                      console.log(mailData);
                       swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
                     }
-                }); 
-              }else if(res.data.status === 400){
+                });  
+              }else{
                   swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
               } 
             }); 
@@ -232,10 +227,10 @@ export default function ServicesPay() {
                 </div>
               </div>
               <div className="center-container ">
-                <ReCAPTCHA
+               {/*  <ReCAPTCHA
                   sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
                   onChange={handleRecaptchaChange}
-                />
+                /> */}
                </div>
             </div>
           </div>
