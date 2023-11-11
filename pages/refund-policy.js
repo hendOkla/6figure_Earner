@@ -18,7 +18,7 @@ const RefundPolicy = () => {
                     <h3>Questions</h3>
                     <p>If you have any Questions concerning out return policy, Pleas contact us at:</p>
                     <p>+971545565988</p>
-                    <p>6figure-earner@6figure-earner.net</p>
+                    <p>6figure-earner@6figure-earner.com</p>
                 </div>
             </div>
  

@@ -11,13 +11,13 @@ export default async function (req, res) {
         port: 587,
         secure: false,
         auth: {
-          user: '6figure-earner@6figure-earner.net',
-          pass: 'bvNeflW1',
+          user: '6figure-earner@6figure-earner.com',
+          pass: 'xorTVbJ8s',
         },
     });
 
     const message = {
-        from: '6figure-earner@6figure-earner.net',
+        from: '6figure-earner@6figure-earner.com',
         to: reMailData.email,
         subject: `congratulations a new member ${reMailData.newUser} has joined  `,
         html: 

@@ -104,17 +104,17 @@ const Footer = () => {
                   <li>
                     <Icon.Mail />
                     {translations ? (translations.form.email) : ('')}:{" "}<br></br>
-                    <a href="mailto:6figure-earner@6figure-earner.net">6figure-earner@6figure-earner.net</a>
+                    <a href="mailto:6figure-earner@6figure-earner.com">6figure-earner@6figure-earner.com</a>
                   </li>
                   <li>
                     <Icon.MapPin />
                     {translations ? (translations.form.address) : ('')}:{" "}<br></br>
-                    <a href="mailto:6figure-earner@6figure-earner.net">{translations ? (translations.form.addres) : ('')}:{" "}</a>
+                    <a href="mailto:6figure-earner@6figure-earner.com">{translations ? (translations.form.addres) : ('')}:{" "}</a>
                   </li>
                   <li>
                     <Icon.Phone />
                     {translations ? (translations.form.phone) : ('')}:{" "}<br></br>
-                    <a href="mailto:6figure-earner@6figure-earner.net">+971545565988</a>
+                    <a href="mailto:6figure-earner@6figure-earner.com">+971545565988</a>
                   </li>
                   {/* <li>
                     <Icon.PhoneCall />

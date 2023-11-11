@@ -74,11 +74,9 @@ export default function ServicesPay() {
       const attendedBy = localStorage.getItem('attendedBy');      
       const password = localStorage.getItem('password');  
       const sendEmail = localStorage.getItem('email');
+
       const amount= localStorage.getItem('amount');
       const plan = localStorage.getItem('plan');
-
-
-      const { type } = router.query;
 
       if (storedEmail) {
         setEmail(storedEmail);
@@ -89,7 +87,7 @@ export default function ServicesPay() {
       }else{
        
         const query = new URLSearchParams(router.asPath.split('?')[1]);
-        if (type === 'success') {
+        if (query.get('type')==='success') {
 
           try {
             const data = {
@@ -171,10 +169,10 @@ export default function ServicesPay() {
             swal("Error",`Something went wrong, please contact our support team`,"error"); 
           }          
         }    
-        if (type === 'canceled') {
+        if (query.get('type')==='canceled') {
           swal("Error",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
-        }
-
+        } 
+        
       }
     }, [showStatus]);
 
@@ -203,14 +201,14 @@ export default function ServicesPay() {
                     </div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>1.00{' '}
+                        <sup>$</sup>30.00{' '}
                       </span>
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"1")} className="btn btn-primary" type="submit" name="amount" value="1" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"30")} className="btn btn-primary" type="submit" name="amount" value="30" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -233,7 +231,7 @@ export default function ServicesPay() {
                   </div>
                 </div>
               </div>
-              <div class="center-container ">
+              <div className="center-container ">
                 <ReCAPTCHA
                   sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
                   onChange={handleRecaptchaChange}
