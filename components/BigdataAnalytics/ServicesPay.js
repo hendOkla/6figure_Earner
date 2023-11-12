@@ -227,10 +227,10 @@ export default function ServicesPay() {
                 </div>
               </div>
               <div className="center-container ">
-               {/*  <ReCAPTCHA
+                <ReCAPTCHA
                   sitekey="6LeNoNsoAAAAAGP9LtPnTn45Ft3A32ytuxdLvCMh"
                   onChange={handleRecaptchaChange}
-                /> */}
+                /> 
                </div>
             </div>
           </div>
