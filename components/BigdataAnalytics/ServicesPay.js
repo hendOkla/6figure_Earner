@@ -36,7 +36,7 @@ export default function ServicesPay() {
       if (isHuman) {
 
         localStorage.setItem('amount',value);
-        if(value=="1"){
+        if(value=="300"){
           localStorage.setItem('plan',"Standard");
         }else{
           localStorage.setItem('plan',"Pro");
@@ -196,14 +196,14 @@ export default function ServicesPay() {
                     </div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>1.00{' '}
+                        <sup>$</sup>300.00{' '}
                       </span>
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"1")} className="btn btn-primary" type="submit" name="amount" value="1" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"300")} className="btn btn-primary" type="submit" name="amount" value="300" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
