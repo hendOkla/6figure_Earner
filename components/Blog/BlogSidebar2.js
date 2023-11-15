@@ -15,7 +15,10 @@ const BlogSidebar2 = () => {
     const { pathname, query } = router;
     const [translations, setTranslations] = useState(null);
 
-    useEffect(()=>{        
+    useEffect(()=>{   
+        const { URL } = router.query;
+        console.log(URL);
+        
         const course_id =localStorage.getItem(`course_id`);
         const lesson_id =localStorage.getItem(`lesson_id`);
         
@@ -33,7 +36,7 @@ const BlogSidebar2 = () => {
         }
         fetchTranslations();
         
-    },[]);
+    },[URL]);
 
     const handleDownloadClick = (e,videoId,Url)=>{
         e.preventDefault();
@@ -61,12 +64,12 @@ const BlogSidebar2 = () => {
                                         LessonsInput.map((item)=>{
                                             return(                                            
                                                 <article className="item">
-                                                    <Link href="#" className="thumbS" width={'150px'}>
+{/*                                                     <Link href="#" className="thumbS" width={'150px'}>
                                                         <video key={videoKey} width={'150px'} controls controlsList="nodownload" onContextMenu={(e) => e.preventDefault()}>
                                                             <source src={`https://6figure-earner.com/LarReApi/public/${(locale==='ar')?item.video:item[`video_${locale}`]}`} />
                                                             Your browser does not support the video tag.
                                                         </video>
-                                                    </Link>
+                                                    </Link> */}
                                                     <div className="info">
                                                         <h4 className="title usmall">
                                                             <Link href="#" onClick={(e)=>handleDownloadClick(e,item.id, (locale==='ar')? item.video :item[`video_${locale}`])}>

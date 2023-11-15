@@ -43,17 +43,17 @@ const Blog5 = () => {
 
     function fetchCourseList(){
         axios.get(`/api/courseWIdCat`, {params: {id: id,status: 0}} ).then(res=>{
-            console.log (id);
+            /* console.log (id); */
             if(res.data.status === 200){
                 setCurseList(res.data.course)
-                console.log(res.data.course);
+                /* console.log(res.data.course); */
             }
         });
         axios.get(`/api/courseWIdCat`, {params: {id: id,status: 1}} ).then(res=>{
-            console.log (id);
+            /* console.log (id); */
             if(res.data.status === 200){
                 setCurseListBook(res.data.course)
-                console.log(res.data.course);
+                /* console.log(res.data.course); */
             }
         });
 

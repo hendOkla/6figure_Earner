@@ -2528,6 +2528,21 @@
     padding-right: 170px;
   }
 }
+
+.offer{
+  font-size: 2rem;
+  color: #ff408a;
+  font-family: -webkit-body;
+}
+.price-offer{
+  font-size: 2rem;
+  text-decoration-line: line-through;
+  text-decoration-color: #fab007;
+  color: #514f4f;
+  font-family: emoji;
+}
+
+
 /* Min width 1200px */
 @media only screen and (min-width: 1350px) {
   .container {

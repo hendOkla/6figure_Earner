@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
-import StripeCheckout from 'react-stripe-checkout';
+import * as Icon from 'react-feather';
 import swal from 'sweetalert';
 import axios from 'axios';
 
@@ -36,7 +35,7 @@ export default function ServicesPay() {
       if (isHuman) {
 
         localStorage.setItem('amount',value);
-        if(value=="300"){
+        if(value=="210"){
           localStorage.setItem('plan',"Standard");
         }else{
           localStorage.setItem('plan',"Pro");
@@ -194,16 +193,21 @@ export default function ServicesPay() {
                     <div className="pricing-header">
                       <h3>6FE Standard</h3>
                     </div>
-                    <div className="price">
+                    <div className='row'><span className='offer'>Offer 30%</span></div>
+                    <div className="price">                      
                       <span>
-                        <sup>$</sup>300.00{' '}
+                        <sup>$</sup>210.00{' '}
                       </span>
                     </div>
+                    <div className="row">
+                      <span className='price-offer'>300%</span>
+                    </div>
+
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"300")} className="btn btn-primary" type="submit" name="amount" value="300" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"210")} className="btn btn-primary" type="submit" name="amount" value="210" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -212,16 +216,20 @@ export default function ServicesPay() {
                     <div className="pricing-header">
                       <h3>6FE Pro</h3>
                     </div>
+                    <div className='row'><span className='offer'>Offer 30%</span></div>
                     <div className="price">
                       <span>
-                        <sup>$</sup>600.00{' '}
+                        <sup>$</sup>420.00{' '}
                       </span>
+                    </div>
+                    <div className="row">
+                      <span className='price-offer'>600%</span>
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"600")} className="btn btn-primary" type="submit" name="amount"value ="600" role="link" >Pro</button>
+                      <button onClick={(e) => handleButtonClick(e,"420")} className="btn btn-primary" type="submit" name="amount"value ="420" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
