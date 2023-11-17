@@ -15,6 +15,8 @@ const SignUp = () => {
     const { pathname, query } = router;
     const [translations, setTranslations] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const [errorConf,setErrorCont] = useState([]);
     const [registerInput,setRegister]=useState({
         username:'',
@@ -38,6 +40,7 @@ const SignUp = () => {
     }
     const Register= async(e)=>{
         e.preventDefault();
+        setIsLoading(true);
         setErrorCont(''); 
           //CHECK IF PASSWORD EQUAL CONFIRM PASSWORD  
         if(registerInput.password === registerInput.confPassword){
@@ -65,13 +68,14 @@ const SignUp = () => {
                         router.push('/pay');
                     }else{
                         setRegister({...registerInput,error_list:res.data.validation_errors})    
-                        console.log(res.data.validation_errors);                 
+                        setIsLoading(false);            
                     }
                 })
                 
             })
         }else{
             setErrorCont('password not match wit Confirm password');
+            setIsLoading(false);
         }
  
 
@@ -104,7 +108,7 @@ const SignUp = () => {
                     <div className="auth-form">
                         <div className="auth-head">
                             <Link href="/it-startup">
-                                <img src="/images/logo.png" />
+                                <img src="/images/logo.png" style={{width:'50%'}} />
                             </Link>
                             <p>{translations ? (translations.form.createAccount) : ('')}</p>
                         </div>
@@ -172,7 +176,18 @@ const SignUp = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">{translations ? (translations.form.signUp) : ('')}</button>
+                            {isLoading ? 
+                                (
+                                    <div class="containerLoadin" style={{height:'30vh'}}>
+                                        <div class="ring"></div>
+                                        <div class="ring"></div>
+                                        <div class="ring"></div>
+                                        <span class="loading">Loading...</span>            
+                                    </div>
+                                ) : (
+                                    <button type="submit" className="btn btn-primary">{translations ? (translations.form.signUp) : ('')}</button>                                
+                                )
+                            }
                         </form>
                         <div className="foot">
                             <p>{translations ? (translations.form.haveAccount) : ('')} <Link href="/login">{translations ? (translations.form.login) : ('')}</Link></p>

@@ -18,6 +18,7 @@ const Login = () => {
     const { locale } = router;
     const { pathname, query } = router;
     const [translations, setTranslations] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const[loginInput, setLogin]= useState({
         email:'',
@@ -31,43 +32,35 @@ const Login = () => {
     }
     const handleSubmit= async(e)=>{
         e.preventDefault();
+        setIsLoading(true);
 
         const data ={
             email :loginInput.email,
             password :loginInput.password,
         }
           //CHECK IF PASSWORD EQUAL CONFIRM PASSWORD  
-            axios.get(`/sanctum/csrf-cookie`).then(response=>{
-                axios.post(`/api/login-customer`,data).then(res=>{
-                    if(res.data.status===200){
-                        localStorage.setItem('auth_token',res.data.token);
-                        localStorage.setItem('auth_token',res.data.fname); 
-                        localStorage.setItem('username',res.data.username);
-                        localStorage.setItem('link',res.data.link); 
-                        localStorage.setItem('email',loginInput.email); 
-
-                       
-
-                        swal("Success",res.data.message,"success"); 
-                        if(localStorage.getItem(`course_id`)!==null){
-                            router.push({pathname: '/blog-details' , query: { id: localStorage.getItem(`course_id`) }});
-                        }else{
-                            router.push({pathname: '/'});
-                        }
-
-                        
-                    }else if(res.data.status===401){
-                        swal("Warning",res.data.message,"warning");                
+        axios.get(`/sanctum/csrf-cookie`).then(response=>{
+            axios.post(`/api/login-customer`,data).then(res=>{
+                if(res.data.status===200){
+                    localStorage.setItem('auth_token',res.data.token);
+                    localStorage.setItem('auth_token',res.data.fname); 
+                    localStorage.setItem('username',res.data.username);
+                    localStorage.setItem('link',res.data.link); 
+                    localStorage.setItem('email',loginInput.email); 
+                    swal("Success",res.data.message,"success"); 
+                    if(localStorage.getItem(`course_id`)!==null){
+                        router.push({pathname: '/blog-details' , query: { id: localStorage.getItem(`course_id`) }});
                     }else{
-                        setLogin({...loginInput,error_list:res.data.validation_errors});
-                    }
-                })
+                        router.push({pathname: '/'});
+                    }                    
+                }else if(res.data.status===401){
+                    swal("Warning",res.data.message,"warning");  
+                    setIsLoading(false);              
+                }else{
+                    setLogin({...loginInput,error_list:res.data.validation_errors});
+                }
             })
-
- 
-
-
-        
+        })
     }
     useEffect(()=>{
         //for translation 
@@ -96,7 +89,7 @@ const Login = () => {
                     <div className="auth-form">
                         <div className="auth-head">
                             <Link href="/it-startup">
-                                <img src="/images/logo.png" />
+                                <img src="/images/logo.png" style={{width:'50%'}} />
                             </Link>
                             <p>{translations ? (translations.form.dontHaveAccount) : ('')} 
                             <Link href="/sign-up">{translations ? (translations.form.signUp) : ('')}</Link></p>
@@ -122,11 +115,19 @@ const Login = () => {
                                 />
                                 <span className='span span-reg'>{loginInput.error_list.password}</span>
                             </div>
-
-
-                            <button type="submit" className="btn btn-primary">{translations ? (translations.form.login) : ('')}</button>
+                            {isLoading ? 
+                                (
+                                    <div class="containerLoadin" style={{height:'30vh'}}>
+                                        <div class="ring"></div>
+                                        <div class="ring"></div>
+                                        <div class="ring"></div>
+                                        <span class="loading">Loading...</span>            
+                                    </div>
+                                ) : (
+                                    <button type="submit" className="btn btn-primary">{translations ? (translations.form.login) : ('')}</button>                                
+                                )
+                            }
                         </form>
-
                         <div className="foot">
                             <p></p>
                             <ul>
