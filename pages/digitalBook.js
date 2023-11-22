@@ -66,9 +66,10 @@ const digitalBook = () => {
                                           <div className="blog-details-area ptb-80">
                                               <div className="container">
                                                   <div className="row">
-                                                      <div className="col-lg-12 col-md-12">
-                                                          <embed src={`https://6figure-earner.com/LarReApi/public/${item[`book_${locale}`]}`} className="pdf-embed" width="100%" height="1500px" type="application/pdf" scrolling="auto"/>
-                                                      </div>
+                                                    <div className="col-lg-12 col-md-12">
+                                                        <iframe src={`https://6figure-earner.com/LarReApi/public/${item[`book_${locale}`]}`} className="pdf-embed" width="100%" height="100%"></iframe>
+                                                    </div>
+
                                                   </div>
                                               </div>
                                           </div>   
