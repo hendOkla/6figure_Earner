@@ -45,7 +45,7 @@ const digitalBook = () => {
           <style jsx>{`
               .pdf-embed {
                   width: 100%;
-                  height: 1500px;
+                  height: 100vh;
               }
 
               /* Hide download and print buttons */
