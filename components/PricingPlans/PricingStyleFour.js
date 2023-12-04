@@ -65,7 +65,7 @@ const PricingStyleFour = () => {
                                             </div>
 
                                             <div className="price">
-                                                $350 <span></span>
+                                                $299 <span></span>
                                             </div>
 
                                             <div className="buy-btn">
@@ -94,7 +94,7 @@ const PricingStyleFour = () => {
                                             </div>
 
                                             <div className="price">
-                                                $600 <span>/m</span>
+                                                $599 <span></span>
                                             </div>
 
                                             <div className="buy-btn">

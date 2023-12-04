@@ -35,7 +35,7 @@ export default function ServicesPay() {
       if (isHuman) {
 
         localStorage.setItem('amount',value);
-        if(value=="210"){
+        if(value=="299"){
           localStorage.setItem('plan',"Standard");
         }else{
           localStorage.setItem('plan',"Pro");
@@ -193,21 +193,21 @@ export default function ServicesPay() {
                     <div className="pricing-header">
                       <h3>6FE Standard</h3>
                     </div>
-                    <div className='row'><span className='offer'>Offer 30%</span></div>
+                    {/* <div className='row'><span className='offer'>Offer 30%</span></div> */}
                     <div className="price">                      
                       <span>
-                        <sup>$</sup>210.00{' '}
+                        <sup>$</sup>299.00{' '}
                       </span>
                     </div>
                     <div className="row">
-                      <span className='price-offer'>300%</span>
+                     {/*  <span className='price-offer'>300%</span> */}
                     </div>
 
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"210")} className="btn btn-primary" type="submit" name="amount" value="210" role="link" >Standard </button>
+                      <button onClick={(e) => handleButtonClick(e,"299")} className="btn btn-primary" type="submit" name="amount" value="299" role="link" >Standard </button>
                     </div>
                   </div>
                 </div>
@@ -216,20 +216,20 @@ export default function ServicesPay() {
                     <div className="pricing-header">
                       <h3>6FE Pro</h3>
                     </div>
-                    <div className='row'><span className='offer'>Offer 30%</span></div>
+                   {/*  <div className='row'><span className='offer'>Offer 30%</span></div> */}
                     <div className="price">
                       <span>
-                        <sup>$</sup>420.00{' '}
+                        <sup>$</sup>599.00{' '}
                       </span>
                     </div>
                     <div className="row">
-                      <span className='price-offer'>600%</span>
+                      {/* <span className='price-offer'>600%</span> */}
                     </div>
                     <div className="pricing-features">
                       <ul></ul>
                     </div>
                     <div className="pricing-footer">
-                      <button onClick={(e) => handleButtonClick(e,"420")} className="btn btn-primary" type="submit" name="amount"value ="420" role="link" >Pro</button>
+                      <button onClick={(e) => handleButtonClick(e,"599")} className="btn btn-primary" type="submit" name="amount"value ="599" role="link" >Pro</button>
                     </div>
                   </div>
                 </div>
