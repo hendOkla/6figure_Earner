@@ -8582,6 +8582,27 @@ Go Top CSS
 }/*# sourceMappingURL=style.css.map */
 
 
+.sidebar {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 999999;
+}
+.sidebar a {
+  background-color:#555558b8 ;
+  color: #fff;
+  display: block;
+  padding: 15px 10px;
+  /* width:250px */
+}
+.sidebar a:hover{
+  background-color: #f7f7f730;
+}
+.sidebar a:last-child {
+  background-color: #483e3e;
+}/*# sourceMappingURL=style.css.map */
+
+
 .link-service{
   color : #ffb501;
 }
@@ -8648,3 +8669,7 @@ Go Top CSS
   align-items: center;
   
 }
+.glass{
+  background-color: #8988905e;
+}
+

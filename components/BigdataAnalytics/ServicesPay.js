@@ -12,163 +12,163 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 
 export default function ServicesPay() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const { query } = useRouter();
+  const { query } = useRouter();
 
-    const [email, setEmail] = useState('');
-
-
-    const sessionId = decodeURIComponent(query.session_id);
-    const showStatus = decodeURIComponent(query.status);
-
-    const [isHuman, setIsHuman] = useState(false);
-  
-    const handleRecaptchaChange = (value) => {
-      setIsHuman(!!value);
-    };
+  const [email, setEmail] = useState('');
 
 
-    const handleButtonClick = async (e, value) => {
-      e.preventDefault();
+  const sessionId = decodeURIComponent(query.session_id);
+  const showStatus = decodeURIComponent(query.status);
 
-      if (isHuman) {
+  const [isHuman, setIsHuman] = useState(false);
 
-        localStorage.setItem('amount',value);
-        if(value=="299"){
-          localStorage.setItem('plan',"Standard");
-        }else{
-          localStorage.setItem('plan',"Pro");
-        }
-  
-        const data = {
-          CustomerName:localStorage.getItem('username'),
-          InvoiceValue:value,
-          DisplayCurrencyIso: 'USD',
-          CustomerEmail: localStorage.getItem('email')
-        }
-  
-        axios.get(`/api/create`, { params: data }).then(res=>{
-  
-          const invoiceURL = res.data.Data.invoiceURL;
-          
-          window.location.href = res.data.Data.invoiceURL;
-        });
-
-      } else {
-        alert('Please verify that you are a human');
-      }
-
-    };
-    
-    
+  const handleRecaptchaChange = (value) => {
+    setIsHuman(!!value);
+  };
 
 
-    useEffect(() => {
-      const username = localStorage.getItem('username');
-      const link = localStorage.getItem('link');
-      const storedEmail = localStorage.getItem('email');
-      const attendedBy = localStorage.getItem('attendedBy');      
-      const password = localStorage.getItem('password');  
-      const sendEmail = localStorage.getItem('email');
+  const handleButtonClick = async (e, value) => {
+    e.preventDefault();
 
-      const amount= localStorage.getItem('amount');
-      const plan = localStorage.getItem('plan');
+    if (isHuman) {
 
-      if (storedEmail) {
-        setEmail(storedEmail);
-      }  
-      
-      if(!username){
-        router.push('/sign-up/');
+      localStorage.setItem('amount',value);
+      if(value=="299"){
+        localStorage.setItem('plan',"Standard");
       }else{
-       
-        const query = new URLSearchParams(router.asPath.split('?')[1]);
-        if (query.get('type')==='success') {
-          try {
-            const data = {
-              username: username,
-              attendedBy: attendedBy,
-              amount: amount,
-              paymentPlan: plan,
-              email: sendEmail,
-              password: password
-            };
-
-            const mailData = {
-              username:username,
-              email:sendEmail,
-              link: link,
-              password: password,                  
-            }
-            axios.post(`/api/payment`,data).then(res=>{
-              if(res.data.status==200){                
-                //send mail for user registered
-                  fetch('/api/send-email', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ mailData }),
-                })
-                  .then(response => response.json())
-                  .then(data => {
-                    if (data.status===200) {
-                      axios.post(`/api/updateCustomStatus/${username}`).then(ress=>{
-                        if(ress.status ===200){
-                              //get user who attended by he
-                            axios.get(`/api/getCEmail/${attendedBy}`,data).then(resEmail=>{
-                              if(resEmail.data.email){
-  
-                                //send mail for user registered
-                                const reMailData = {
-                                  username:attendedBy,
-                                  email:resEmail.data.email,
-                                  newUser:username                                            
-                                }
-  
-                                fetch('/api/receive-email', {
-                                  method: 'POST',
-                                  headers: {
-                                    'Content-Type': 'application/json',
-                                  },
-                                  body: JSON.stringify({ reMailData }),
-                                })
-                                  .then(responseMail => responseMail.json())
-                                  .then(data => {
-                                    if (data.status===200) {  
-                                      swal("Success",`Ready to show videos,Please check your mail......`,"success");  
-                                      router.push('/'); 
-                                    } else {
-                                      swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
-                                    }
-                                }); 
-                              }
-  
-                            });
-                        }else{
-                          swal("Error",res.data.error,"error");
-                        }
-                      }); 
-                    } else {
-                      swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
-                    }
-                });  
-              }else{
-                  swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
-              } 
-            }); 
-            
-          } catch (error) {
-            swal("Error",`Something went wrong, please contact our support team`,"error"); 
-          }          
-        }    
-        if (query.get('type')==='canceled') {
-          swal("Error",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
-        } 
-        
+        localStorage.setItem('plan',"Pro");
       }
-    }, [showStatus]);
+
+      const data = {
+        CustomerName:localStorage.getItem('username'),
+        InvoiceValue:value,
+        DisplayCurrencyIso: 'USD',
+        CustomerEmail: localStorage.getItem('email')
+      }
+
+      axios.get(`/api/create`, { params: data }).then(res=>{
+
+        const invoiceURL = res.data.Data.invoiceURL;
+        
+        window.location.href = res.data.Data.invoiceURL;
+      });
+
+    } else {
+      alert('Please verify that you are a human');
+    }
+
+  };
+    
+    
+
+
+  useEffect(() => {
+    const username = localStorage.getItem('username');
+    const link = localStorage.getItem('link');
+    const storedEmail = localStorage.getItem('email');
+    const attendedBy = localStorage.getItem('attendedBy');      
+    const password = localStorage.getItem('password');  
+    const sendEmail = localStorage.getItem('email');
+
+    const amount= localStorage.getItem('amount');
+    const plan = localStorage.getItem('plan');
+
+    if (storedEmail) {
+      setEmail(storedEmail);
+    }  
+    
+    if(!username){
+      router.push('/sign-up/');
+    }else{
+      
+      const query = new URLSearchParams(router.asPath.split('?')[1]);
+      if (query.get('type')==='success') {
+        try {
+          const data = {
+            username: username,
+            attendedBy: attendedBy,
+            amount: amount,
+            paymentPlan: plan,
+            email: sendEmail,
+            password: password
+          };
+
+          const mailData = {
+            username:username,
+            email:sendEmail,
+            link: link,
+            password: password,                  
+          }
+          axios.post(`/api/payment`,data).then(res=>{
+            if(res.data.status==200){                
+              //send mail for user registered
+                fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ mailData }),
+              })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.status===200) {
+                    axios.post(`/api/updateCustomStatus/${username}`).then(ress=>{
+                      if(ress.status ===200){
+                            //get user who attended by he
+                          axios.get(`/api/getCEmail/${attendedBy}`,data).then(resEmail=>{
+                            if(resEmail.data.email){
+
+                              //send mail for user registered
+                              const reMailData = {
+                                username:attendedBy,
+                                email:resEmail.data.email,
+                                newUser:username                                            
+                              }
+
+                              fetch('/api/receive-email', {
+                                method: 'POST',
+                                headers: {
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({ reMailData }),
+                              })
+                                .then(responseMail => responseMail.json())
+                                .then(data => {
+                                  if (data.status===200) {  
+                                    swal("Success",`Ready to show videos,Please check your mail......`,"success");  
+                                    router.push('/'); 
+                                  } else {
+                                    swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
+                                  }
+                              }); 
+                            }
+
+                          });
+                      }else{
+                        swal("Error",res.data.error,"error");
+                      }
+                    }); 
+                  } else {
+                    swal("Error",`an error occurred. If you are sure that the payment has been completed, please submit the issue and our support team will contact you`,"error"); 
+                  }
+              });  
+            }else{
+                swal("Failed",'Something went wrong, please contact support to resolve the issue...',"warning");                    
+            } 
+          }); 
+          
+        } catch (error) {
+          swal("Error",`Something went wrong, please contact our support team`,"error"); 
+        }          
+      }    
+      if (query.get('type')==='canceled') {
+        swal("Error",`Order canceled -- continue to shop around and checkout when you’re ready.`,"error"); 
+      } 
+      
+    }
+  }, [showStatus]);
 
   return (
     

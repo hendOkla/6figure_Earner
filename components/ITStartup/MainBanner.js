@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { getDictionary } from "getDictionary";
 import { useRouter } from 'next/router';
 
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
 const MainBanner = () => {
     const router = useRouter();
 
@@ -28,14 +31,25 @@ const MainBanner = () => {
                         <div className="container">
                             <div className="row h-100 justify-content-center align-items-center">
                                 <div className="col-lg-5">
-                                    <div className="hero-content">
-                                        <h1>{translations ? (translations.form.Different) : ('')}</h1>
-                                        <p>{translations ? (translations.form.forstPlat) : ('')}</p>
-                                        
-                                        <Link href="/login" className="btn btn-primary">
-                                            {translations ? (translations.form.getStatrt) : ('')}
-                                        </Link>
-                                    </div>
+                                    <Carousel>
+                                        <div className="hero-content">
+                                            <h1>{translations ? (translations.form.Different) : ('')}</h1>
+                                            <p>{translations ? (translations.form.forstPlat) : ('')}</p>
+                                            
+                                            <Link href="/login" className="btn btn-primary">
+                                                {translations ? (translations.form.getStatrt) : ('')}
+                                            </Link>
+                                        </div>
+                                        <div className="hero-content">
+                                            <h1>{translations ? (translations.form.Different) : ('')}</h1>
+                                            <p>{translations ? (translations.form.forstPlat) : ('')}</p>
+                                            
+                                            <Link href="/login" className="btn btn-primary">
+                                                {translations ? (translations.form.getStatrt) : ('')}
+                                            </Link>
+                                        </div>
+                                    </Carousel>
+
                                 </div>
 
                                 <div className="col-lg-6 offset-lg-1">

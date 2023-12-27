@@ -2,9 +2,9 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import * as Icon from "react-feather";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { getDictionary } from "getDictionary";
+import { FaGlobe } from 'react-icons/fa';
 
 
 
@@ -20,10 +20,8 @@ const NavbarStyleFour = () => {
   const [menu, setMenu] = React.useState(true);
   const [categoryList,setCategoryList] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
-
-
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { locale } = router;
   const { pathname, query } = router;
   const [translations, setTranslations] = useState(null);
@@ -69,8 +67,6 @@ const NavbarStyleFour = () => {
     if(isLoggedIn){
       axios.post('api/logout-customer').then(res=>{
         if(res.data.status===200){
-          /* localStorage.removeItem('auth_token');
-          localStorage.removeItem('auth_token'); */
           window.localStorage.clear();
           if (router.pathname === '/') {
             router.reload(); // Reload the page if on the "/" path
@@ -97,6 +93,10 @@ const NavbarStyleFour = () => {
     });
   } 
 
+  const sidebarDropdown = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   const classOne = menu
     ? "collapse navbar-collapse"
     : "collapse navbar-collapse show";
@@ -120,14 +120,9 @@ const NavbarStyleFour = () => {
             <div className="container">
               <nav className="navbar navbar-expand-md navbar-light">
                 <Link href="/" className="navbar-brand img-header">
-                  <img src="/images/logo-white.png" alt="logo"     height= {"75px;"} />
+                  <img src="/images/logo-white.png" alt="logo" height= {"75px;"} />
                   
                 </Link>
-                <div style={{ color: 'white' }}> 
-                  <span style={{ fontWeight: 900, padding: 10 }}> {isLoggedIn ? '': ''} </span>      
-                  {isLoggedIn ? localStorage.getItem('link'): ''}  
-                </div>
-
                 <button
                   onClick={toggleNavbar}
                   className={classTwo}
@@ -234,14 +229,35 @@ const NavbarStyleFour = () => {
             </div>
           </div>
         </header>
+        
       )}
-
-
-
-
+      {isLoggedIn && (
+        <div className="sidebar">
+          <div className="dropdown" onClick={sidebarDropdown}>
+              <a href="#" title="Default Demo" style={{ backgroundColor: "#483e3e00" }}>
+              <img src="/images/myProfile.png" alt="logo" height= {"50px;"}  width={"50px"} style={{borderRadius:"50px"}} />
+            </a>  
+            {sidebarOpen && (
+              <>
+                <a href="#" title="Demo">
+                  {localStorage.getItem('link')}
+                </a>
+                <a href="/myProfile" title="RTL Demo">
+                  My Profile
+                </a>
+                <a href="/changePassword" title="RTL Demo">
+                  Change password
+                </a>
+                <a href='#' title="RTL Demo">
+                  My balance :                
+                </a>
+                <a href='#' title="RTL Demo" style={{ backgroundColor: "#483e3e00" }}></a>
+              </>
+            )}
+          </div>
+        </div>
+      )} 
     </div>
-
-    
   );
 };
 

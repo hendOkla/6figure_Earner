@@ -10,9 +10,6 @@ import axios from 'axios';
 import { getDictionary } from "getDictionary";
  
 const Login = () => {
-
-   
-
     const router = useRouter();
 
     const { locale } = router;
@@ -27,8 +24,7 @@ const Login = () => {
     });
     const handleInput=(e)=>{
         e.persist(); 
-        setLogin({...loginInput,[e.target.name]:e.target.value});
-        
+        setLogin({...loginInput,[e.target.name]:e.target.value});        
     }
     const handleSubmit= async(e)=>{
         e.preventDefault();
@@ -44,6 +40,7 @@ const Login = () => {
                 if(res.data.status===200){
                     localStorage.setItem('auth_token',res.data.token);
                     localStorage.setItem('auth_token',res.data.fname); 
+                    localStorage.setItem('id',res.data.id);
                     localStorage.setItem('username',res.data.username);
                     localStorage.setItem('link',res.data.link); 
                     localStorage.setItem('email',loginInput.email); 
@@ -51,7 +48,7 @@ const Login = () => {
                     if(localStorage.getItem(`course_id`)!==null){
                         router.push({pathname: '/blog-details' , query: { id: localStorage.getItem(`course_id`) }});
                     }else{
-                        router.push({pathname: '/'});
+                        router.push({pathname: '/myPage'});
                     }                    
                 }else if(res.data.status===401){
                     swal("Warning",res.data.message,"warning");  
@@ -117,11 +114,11 @@ const Login = () => {
                             </div>
                             {isLoading ? 
                                 (
-                                    <div class="containerLoadin" style={{height:'30vh'}}>
-                                        <div class="ring"></div>
-                                        <div class="ring"></div>
-                                        <div class="ring"></div>
-                                        <span class="loading">Loading...</span>            
+                                    <div className="containerLoadin" style={{height:'30vh'}}>
+                                        <div className="ring"></div>
+                                        <div className="ring"></div>
+                                        <div className="ring"></div>
+                                        <span className="loading">Loading...</span>            
                                     </div>
                                 ) : (
                                     <button type="submit" className="btn btn-primary">{translations ? (translations.form.login) : ('')}</button>                                

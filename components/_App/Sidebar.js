@@ -14,6 +14,9 @@ const Sidebar = () => {
 
   const [translations, setTranslations] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     async function fetchTranslations() {
@@ -21,25 +24,34 @@ const Sidebar = () => {
       setTranslations(translations);
     }
     fetchTranslations();
-  }, []);
+    
+
+    if (typeof window !== 'undefined') {
+      const authToken = window.localStorage.getItem('auth_token');   
+      if (authToken !== null) {
+        // Do something if link is not empty
+        setIsLoggedIn(true);
+      }else {
+        setIsLoggedIn(false);
+      }
+    } 
+  },[isLoggedIn]);
 
   // Function to toggle the dropdown state
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+  const sidebarDropdown = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
  return (
    <>
      <div className="lang-didebar">
-       {/* Add onClick event and conditionally render dropdown based on dropdownOpen state */}
        <div className="dropdown" onClick={toggleDropdown}>
-
          <a href="#" title="Default Demo" style={{ backgroundColor: "#483e3e00" }}>
           <FaGlobe />
          </a>
-
-
-         {/* Conditionally render dropdown content if dropdown is open */}
          {dropdownOpen && (
            <>
             <a href={`${pathname}?${new URLSearchParams(query).toString()}`} title="Demo">
@@ -58,6 +70,7 @@ const Sidebar = () => {
          )}
        </div>
      </div>
+
    </>
  );
 };
