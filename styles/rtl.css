@@ -898,3 +898,23 @@
 [dir=rtl] .slick-slide {
   float: left;
 }/*# sourceMappingURL=rtl.css.map */
+
+/* Create the caret/arrow with a unicode, and style it */
+[dir=rtl] .caret::before {
+  content: "\25C0";
+  color: white;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+[dir=rtl] .caret-down::before {
+  transform: rotate(-90deg);
+}
+
+
+
+
+
+
+

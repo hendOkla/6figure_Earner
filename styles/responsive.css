@@ -1329,7 +1329,7 @@
     padding-bottom: 20px;
   }
   .navbar-color-white#header.headroom {
-    border-color: #4a4545;
+    border-color: white;
   }
   .bigdata-analytics-banner {
     padding-top: 170px;
@@ -2538,7 +2538,7 @@
   font-size: 2rem;
   text-decoration-line: line-through;
   text-decoration-color: #fab007;
-  color: #514f4f;
+  color: white;
   font-family: emoji;
 }
 
@@ -2607,3 +2607,18 @@
     max-width: 1250px;
   }
 }/*# sourceMappingURL=responsive.css.map */
+
+
+.StyledDiv{
+  margin: 16px;
+}
+.spam-ul{
+  padding:5px;
+}
+.tb-text{
+  text-align: center !important;
+  font-style: italic;
+  color: #ff7508;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgb(255 69 126);
+}

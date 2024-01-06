@@ -248,8 +248,8 @@ const NavbarStyleFour = () => {
                 <a href="/changePassword" title="RTL Demo">
                   Change password
                 </a>
-                <a href='#' title="RTL Demo">
-                  My balance :                
+                <a href='/myBalance' title="RTL Demo">
+                  My balance                
                 </a>
                 <a href='#' title="RTL Demo" style={{ backgroundColor: "#483e3e00" }}></a>
               </>
