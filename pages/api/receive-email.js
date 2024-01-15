@@ -158,7 +158,6 @@ export default async function (req, res) {
                                     <p>Hello  ${reMailData.username}</p>                                    
                                     <p>${reMailData.newUser} has joined us through your share link.</p>
                                     <p> You will get 15% every time ${reMailData.newUser} renews his monthly subscription....</p>
-                                    <p>You can lose your personal account</p>
                                     <p>Please make sure ${reMailData.newUser} knows how to log into his admin office and start his journey</p>                                   
                                 </td>
                             </tr>
