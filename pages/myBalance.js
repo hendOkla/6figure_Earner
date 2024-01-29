@@ -29,7 +29,10 @@ const MyBalance = () => {
           const secondFollowerPromises = res.data.attendBy.map(async (element) => {
             // Make a query for each element
             const queryResult = await axios.get(`/api/get-attendBy/${element.username}`);
+            console.log(queryResult.data.dd);
             return queryResult.data.attendBy;
+
+            
           });
 
           Promise.all(secondFollowerPromises).then((results) => {
@@ -82,7 +85,6 @@ const MyBalance = () => {
                 <span className="caret caret-down">{username}</span>
                 <ul className="nested active">
                 {firstFollowerList.map((follower, index) => {
-
                   const currentDate = new Date();
                   const currentMonth = currentDate.getMonth() + 1; // Months are zero-indexed, so add 1
                   const currentYear = currentDate.getFullYear();
@@ -91,12 +93,9 @@ const MyBalance = () => {
                   const followerMonth = followerCreatedAt.getMonth() + 1;
                   const followerYear = followerCreatedAt.getFullYear();
                   
-                  
                   const followerUpdatedAt = new Date(follower.updated_at);
                   const followerUpdatedMonth = followerUpdatedAt.getMonth() + 1;
                   const followerUpdatedYear = followerUpdatedAt.getFullYear();
-
-
 
                   if (followerMonth === currentMonth && followerYear === currentYear) {
                     firstCounter++;
@@ -105,26 +104,20 @@ const MyBalance = () => {
                     firstCounter++;
                     totalSum += 50 * 0.5;
                   }
-
-
-
-
                   return (
                     <li key={follower.username}>
                       <span className="caret active caret-down Level2">
                         <span className="spam-ul">{follower.username}</span>
                         <span className="span span-reg StyledDiv"> {(followerMonth === currentMonth && followerYear === currentYear)?`${(follower.amount * 0.15)}$`:((followerUpdatedMonth===currentMonth && followerUpdatedYear===currentYear)?`${(50 * 0.5)}$`:'0 $')}</span>
                       </span>
-
                       <ul className="nested active level3">
                         {secondFollowerLists[index]?.map((secondFollower) => {
 
-                          const secondCreatedAt = new Date(secondFollowerLists.created_at);
+                          const secondCreatedAt = new Date(secondFollower.created_at);
                           const secondMonth = secondCreatedAt.getMonth() + 1;
                           const secondYear = secondCreatedAt.getFullYear();
 
-
-                          const secondUpdatedAt = new Date(secondFollowerLists.updated_at);
+                          const secondUpdatedAt = new Date(secondFollower.updated_at);
                           const secondUpdatedMonth = secondUpdatedAt.getMonth() + 1;
                           const secondUpdatedYear = secondUpdatedAt.getFullYear();
 
@@ -135,22 +128,16 @@ const MyBalance = () => {
                             totalSum += secondFollower.amount * 0.01;
                           } else if(secondUpdatedMonth===currentMonth && secondUpdatedYear===currentYear){
                             secondCounter++;
-                            totalSum += 50 * 0.5;
-                          }
-
-
-
-                          
-                          
+                            totalSum += 50 * 0.1;
+                          }                          
                           return (
                             <li key={secondFollower.username}>
                               <span className="spam-ul">{secondFollower.username}</span>
-                              <span className="span span-reg StyledDiv">     {(secondMonth === currentMonth && secondYear === currentYear)?`${(secondFollower.amount * 0.01)}$`:((secondUpdatedMonth===currentMonth && secondUpdatedYear===currentYear)?`${(50 * 0.5)}$`:'0 $')}</span>
+                              <span className="span span-reg StyledDiv">     {(secondMonth === currentMonth && secondYear === currentYear)?`${(secondFollower.amount * 0.01)}$`:((secondUpdatedMonth===currentMonth && secondUpdatedYear===currentYear)?`${(50 * 0.1)}$`:'0 $')}</span>
                             </li>
                           );
                         })}
-                      </ul>
-                      
+                      </ul>                      
                     </li>
                     
                   );
@@ -158,14 +145,14 @@ const MyBalance = () => {
                 </ul>                
               </li>
             </ul>
-            <spam className="pan span-reg spam-ul">Total Sum: <spam style={{color:'white'}}>{totalSum}$</spam></spam>
+            <spam className="pan span-reg spam-ul">Total Sum: <spam style={{color:'white'}}>{totalSum.toFixed(2)}$</spam></spam>
           </div>
             <div className='row'>
               <div className="cart-table table-responsive" style={{ margin: '0 auto', width: '75%' }}>
                   <table className="table table-bordered">
                       <thead style={{color:'white'}}>
                           <tr>
-                              <th className='tb-text' scope="col" style={{fontSize:"30px"}}  colspan="3"> Company Bonus</th>
+                              <th className='tb-text' scope="col" style={{fontSize:"30px"}}  colSpan="3"> Company Bonus</th>
                           </tr>
                       </thead>
                       <tbody>
