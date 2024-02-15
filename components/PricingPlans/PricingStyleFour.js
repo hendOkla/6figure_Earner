@@ -63,9 +63,15 @@ const PricingStyleFour = () => {
                                                 <p><br></br></p>
                                                 <img src="/images/standard.webp" alt="logo" height="250px;"></img>
                                             </div>
-
-                                            <div className="price">
-                                                $299 <span></span>
+                                            <div className='row'><span className='offer'>SALE</span></div> 
+                                            <div className='row'><span className='offer'>Valentine's Day</span></div> 
+                                            <div className="price">                      
+                                                <span>
+                                                    <sup>$</sup>210.00{' '}
+                                                </span>
+                                            </div>
+                                            <div className="row">
+                                                <span className='price-offer'>299%</span>
                                             </div>
 
                                             <div className="buy-btn">
@@ -91,10 +97,15 @@ const PricingStyleFour = () => {
                                                 <h3>6FE Pro</h3>
                                                 <p><br></br></p>
                                                 <img src="/images/Pro.webp" alt="logo" height="250px;"></img>
+                                            </div>                    <div className='row'><span className='offer'>SALE</span></div> 
+                                            <div className='row'><span className='offer'>Valentine's Day</span></div> 
+                                            <div className="price">                      
+                                                <span>
+                                                    <sup>$</sup>420.00{' '}
+                                                </span>
                                             </div>
-
-                                            <div className="price">
-                                                $599 <span></span>
+                                            <div className="row">
+                                                <span className='price-offer'>599%</span>
                                             </div>
 
                                             <div className="buy-btn">
