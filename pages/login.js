@@ -37,6 +37,8 @@ const Login = () => {
           //CHECK IF PASSWORD EQUAL CONFIRM PASSWORD  
         axios.get(`/sanctum/csrf-cookie`).then(response=>{
             axios.post(`/api/login-customer`,data).then(res=>{
+
+                console.log(res.data.message);
                 if(res.data.status===200){
                     localStorage.setItem('auth_token',res.data.token);
                     localStorage.setItem('auth_token',res.data.fname); 
@@ -53,6 +55,8 @@ const Login = () => {
                 }else if(res.data.status===401){
                     swal("Warning",res.data.message,"warning");  
                     setIsLoading(false);              
+                }else if(res.data.status===400){
+                    router.push({pathname: '/ExpSub'});
                 }else{
                     setLogin({...loginInput,error_list:res.data.validation_errors});
                 }
@@ -67,14 +71,6 @@ const Login = () => {
         }
         fetchTranslations();
     },[]);
-
-
-    
-
-
-
-
-
     return (
         <>
             <Navbar />
